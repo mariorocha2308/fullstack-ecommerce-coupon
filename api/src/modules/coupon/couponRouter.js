@@ -3,9 +3,10 @@ const router = require('express').Router()
 const { getCoupons } = require("./couponService");
 
 router.get('/all', async (_, res) => {
-  
-  const response = await getCoupons()
-  return res.sendStatus(200).json(response)
+  getCoupons()
+  .then(result => {
+    return res.json(result)
+  })
 });
 
 module.exports = router;

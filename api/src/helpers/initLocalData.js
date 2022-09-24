@@ -9,7 +9,7 @@ const initLocalData = async () => {
 
   if (isData.length === 0) {
     for (let i = 0; i < 150; i++) {
-      Coupon.create({
+      Coupon.findOrCreate({
         title: "Coupon",
         type: generateRandomTypes(),
         promoCode: `${generator.generate(8, "all").toUpperCase()}`,
