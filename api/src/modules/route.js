@@ -1,11 +1,11 @@
 'use strict';
 const { Router } = require('express');
-const userRoute = require('./user/userRouter');
+const couponRoute = require('./coupon/couponRouter');
 const router = Router();
 
 const init = () => {
     // *** register routes here *** //
-    router.use('/users', userRoute);
+    router.use('/coupon', couponRoute);
     return router;
 };
 
