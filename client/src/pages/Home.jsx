@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query'
-import { getCouponsQuery } from '../utils/functions/apiQueries';
+import { getCouponsQuery } from '../utils/apiQueries/coupon';
 import { Box } from '@chakra-ui/react'
 import SearchBar from '../components/SearchBar'
 import HotSales from '../components/HotSales';
@@ -16,7 +16,7 @@ const Home = () => {
       <HotSales data={coupons}/>
       <Catalog data={coupons}/>
     </Box> 
-   );
+  );
 }
- 
+
 export default Home;
