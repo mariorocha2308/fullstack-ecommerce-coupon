@@ -8,14 +8,14 @@ const initLocalData = async () => {
   const isData = await Coupon.findAll()
 
   if (isData.length === 0) {
-    for (let i = 0; i < 150; i++) {
-      Coupon.findOrCreate({
+    for (let i = 0; i < 180; i++) {
+      Coupon.create({
         title: "Coupon",
         type: generateRandomTypes(),
-        promoCode: `${generator.generate(8, "all").toUpperCase()}`,
+        promoCode: `${generator.generate(6, "all").toUpperCase()}`,
         price: generateRandomInteger(5, 20),
         stock: generateRandomInteger(1, 6),
-        discountPercent: generateRandomInteger(5, 75)
+        discount: generateRandomInteger(5, 75)
       })
     }
   }

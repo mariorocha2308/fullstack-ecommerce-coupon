@@ -23,7 +23,7 @@ const Coupon = sequelize.define('coupon', {
     type: DataTypes.SMALLINT,
     allowNull: false
   },
-  discountPercent: {
+  discount: {
     type: DataTypes.SMALLINT,
     allowNull: false
   }

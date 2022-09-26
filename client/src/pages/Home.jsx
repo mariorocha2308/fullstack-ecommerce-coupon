@@ -1,16 +1,21 @@
 import React from 'react';
 import { useQuery } from 'react-query'
 import { getCouponsQuery } from '../utils/functions/apiQueries';
+import { Box } from '@chakra-ui/react'
+import SearchBar from '../components/SearchBar'
+import HotSales from '../components/HotSales';
+import Catalog from '../components/Catalog';
 
 const Home = () => {
 
   const { data: coupons } = useQuery(['coupons'], getCouponsQuery)
-  console.log(coupons)
 
-  return ( 
-    <div>
-
-    </div>
+  return (
+    <Box fontWeight='bold' fontSize='2xl'>
+      <SearchBar/>
+      <HotSales data={coupons}/>
+      <Catalog data={coupons}/>
+    </Box> 
    );
 }
  
