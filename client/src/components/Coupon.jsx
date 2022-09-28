@@ -7,8 +7,8 @@ import { couponColorizer } from '../utils/functions/couponColorizer'
 const Coupon = props => {
 
   return (
-    <Box display='flex' w='100%' h='17rem' boxShadow='lg' fontWeight='extrabold' position='relative' borderRadius='5px' overflow='hidden' boxSizing='border-box' p='4' flexDirection='column' minW='230px'>
-      <Circle size='10rem' bg={couponColorizer(props.discount)} color='white' position='absolute' top='-7' right='-8' >
+    <Box display='flex' w='100%' h='17rem' boxShadow='lg' fontWeight='extrabold' position='relative' borderRadius='5px' overflow='hidden' boxSizing='border-box' p='4' flexDirection='column' minW='230px' maxW='230px'>
+      <Circle size='11rem' bg={couponColorizer(props.discount)} color='white' position='absolute' top='-7' right='-8' >
       </Circle>
 
       <Stack spacing='3' direction='row' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800'>
