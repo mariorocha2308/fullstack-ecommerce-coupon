@@ -8,6 +8,7 @@ const routerConfig = require('./modules/route');
 const config = require('./config/config');
 const sequelize = require('./models/index')
 const { initLocalData } = require('./helpers/initLocalData');
+const { initAdmin } = require('./helpers/initAdmin')
 
 const init = async () => {
 
@@ -37,6 +38,7 @@ const init = async () => {
   sequelize.sync({force: false})
   .then(async () => {
     await initLocalData()
+    await initAdmin()
     console.log("Database is ready to use!")
   })
   
