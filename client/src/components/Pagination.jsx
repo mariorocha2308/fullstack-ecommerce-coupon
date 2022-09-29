@@ -30,6 +30,7 @@ const Pagination = ({onPageChange, dataLength, currentPage, pageSize}) => {
         )}
         {range(leftSiblingIndex, rightSiblingIndex).map(pageNumber => (
           <Button
+            key={pageNumber}
             colorScheme={currentPage === pageNumber ? 'teal' : null}
             variant={currentPage === pageNumber ? 'solid' : 'outline'}
             onClick={() => onPageChange(pageNumber)}>

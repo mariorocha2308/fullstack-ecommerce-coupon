@@ -12,8 +12,9 @@ const HotSales = props => {
         <Text>Hot Sales</Text>
       </Box>
       <Stack wrap='nowrap' direction='row' spacing='5' py='4' overflow='auto' px='2'>
-        {props.data?.filter(coupon => coupon.discount > 50 && coupon.price < 12).map(coupon => (
+        {props.data?.filter(coupon => coupon.discount > 50 && coupon.price < 10).map(coupon => (
           <Coupon
+            id={coupon.id}
             key={coupon.id}
             title={coupon.title} 
             type={coupon.type} 
