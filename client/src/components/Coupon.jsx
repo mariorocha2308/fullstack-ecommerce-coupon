@@ -6,15 +6,13 @@ import { couponColorizer } from '../utils/functions/couponColorizer'
 
 const Coupon = props => {
 
-  console.log(props.onFavorite());
-
   return (
     <Box display='flex' w='100%' h='17rem' boxShadow='lg' fontWeight='extrabold' position='relative' borderRadius='5px' overflow='hidden' boxSizing='border-box' p='4' flexDirection='column' minW='230px' maxW={{base: '100%', lg:'230px'}}>
       <Circle size='11rem' bg={couponColorizer(props.discount)} color='white' position='absolute' top='-7' right='-8'>
       </Circle>
 
-      <Stack spacing='3' direction='row' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800' zIndex='toast'>
-        <Icon as={MdFavorite} cursor='pointer' onClick={() => props.onLocal()} color={() => props.onFavorite()}/>
+      <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800' zIndex='toast'>
+        <Icon as={MdFavorite} cursor='pointer'/>
         <Icon as={RiShoppingBag3Fill} cursor='pointer'/>
       </Stack>
 

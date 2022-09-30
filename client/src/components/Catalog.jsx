@@ -2,11 +2,8 @@ import React from 'react';
 import { Box, Grid, GridItem, Text, Icon } from '@chakra-ui/react';
 import { RiCoupon2Fill } from 'react-icons/ri'
 import Coupon from './Coupon';
-import useFavorites from '../hooks/useFavorites';
   
 const Catalog = props => {
-
-  const [setLocalCoupon, isFavorite] = useFavorites()
 
   return ( 
     <Box py='4'>
@@ -24,9 +21,7 @@ const Catalog = props => {
               promoCode={coupon.promoCode} 
               discount={coupon.discount} 
               price={coupon.price}
-              stock={coupon.stock}
-              onLocal={() => setLocalCoupon(coupon.id)}
-              onFavorite={() => isFavorite(coupon.id)}/>
+              stock={coupon.stock}/>
           </GridItem>
         ))}
       </Grid>
