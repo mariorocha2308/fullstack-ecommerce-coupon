@@ -1,52 +1,44 @@
 const { Op } = require('sequelize')
 const Coupon = require('../../models/coupon')
+// const User = require('../../models/user')
 
-const getCoupons = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      Coupon.findAll({raw : true, nest: true})
-      .then(result => {
-        resolve(result)
-      })
-    } catch (error) {
-      reject({ error: "Database does not send all counpons" })
-    }
-  })
+const getCoupons = (_, res) => {
+  try {
+    Coupon.findAll({raw : true, nest: true})
+    .then(result => res.json(result))
+    .catch(() => res.send({ error: "" }))
+  } catch (error) {
+    return res.send({ error: "" })
+  }
 }
 
-const findCoupons = (match) => {
+const findCoupons = (req, res) => {
+  const { match } = req.query
 
-  return new Promise((resolve, reject) => {
-    try {
-      Coupon.findAll({raw : true, nest: true, where: {
-				[Op.or]: [
-					{type: {[Op.iLike]: `%${match}%`}}, 
-					{promoCode: {[Op.iLike]: `%${match}%`}}
-				]
-			}})
-      .then(result => {
-        resolve(result)
-      })
-    } catch (error) {
-      reject({ error: "Database does not match coupons" })
-    }
-  })
+  try {
+    Coupon.findAll({raw : true, nest: true, where: {
+			[Op.or]: [
+				{type: {[Op.iLike]: `%${match}%`}}, 
+				{promoCode: {[Op.iLike]: `%${match}%`}}
+			]
+		}})
+    .then(result => res.json(result))
+    .catch(() => res.send({ error: "" }))
+  } catch (error) {
+    return res.send({ error: "" })
+  }
 }
 
-const getCoupon = (code) => {
+const getCoupon = (req, res) => {
+  const { id } = req.params
 
-  return new Promise((resolve, reject) => {
-    try {
-      Coupon.findOne({raw : true, nest: true, where: { 
-				promoCode: code
-			}})
-      .then(result => {
-        resolve(result)
-      })
-    } catch (error) {
-      reject({ error: "Database does not match coupons" })
-    }
-  })
+  try {
+    Coupon.findOne({raw : true, nest: true, where: { id }})
+    .then(result => res.json(result))
+    .catch(() => res.send({ error: "" }))
+  } catch (error) {
+    return res.send({ error: "" })
+  }
 }
 
 module.exports = {
