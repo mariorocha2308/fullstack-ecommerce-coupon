@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index')
-const User = require('./user')
+// const User = require('./user')
 
 const Coupon = sequelize.define('coupon', {
   // Model attributes are defined here
@@ -28,6 +28,8 @@ const Coupon = sequelize.define('coupon', {
     type: DataTypes.SMALLINT,
     allowNull: false
   }
+}, {
+  timestamps: false
 });
 
 module.exports = Coupon;

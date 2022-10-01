@@ -35,7 +35,7 @@ const init = async () => {
   app.use(cors(configCors));
   app.use(morgan("dev"))
   
-  sequelize.sync({force: false})
+  sequelize.sync({force: true})
   .then(async () => {
     await initLocalData()
     await initAdmin()

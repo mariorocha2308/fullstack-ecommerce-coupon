@@ -3,7 +3,7 @@ const { encrypt } = require('./encrypt')
 
 const initAdmin = async () => {
 
-  const existAdmin = await User.findOne({raw : true, nest: true, where: {role: 'admin-default'}})
+  const existAdmin = await User.findOne({where: {role: 'admin-default'}})
   const hashPasswordAdmin = await encrypt("dev852")
 
   if (existAdmin === null) {
