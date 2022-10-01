@@ -3,6 +3,7 @@ dotenv.config();
 module.exports = {
   SERVER_PORT: process.env.PORT || '',
   NODE_ENV: process.env.NODE_ENV || '',
+  SECRET_ACCESS_TOKEN: process.env.SECRET_ACCESS_TOKEN || '',
   DATABASE_NAME: process.env.DATABASE_NAME,
   DATABASE_USER: process.env.DATABASE_USER,
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index')
+const User = require('./user')
 
 const Coupon = sequelize.define('coupon', {
   // Model attributes are defined here

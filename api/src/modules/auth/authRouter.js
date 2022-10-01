@@ -1,7 +1,8 @@
 'use strict';
 const router = require('express').Router()
-const { authRegister } = require("./authService");
+const { authRegister, authLogin } = require("./authService");
 
 router.post('/register', authRegister)
+router.post('/login', authLogin)
 
 module.exports = router;
