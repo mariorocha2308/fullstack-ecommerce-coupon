@@ -1,9 +1,11 @@
 const { Op } = require('sequelize')
 const Coupon = require('../../models/coupon')
+const Review = require('../../models/review')
+const User = require('../../models/user')
 
 const getCoupons = (_, res) => {
   try {
-    Coupon.findAll()
+    Coupon.findAll({ include: [Review, User] })
     .then(result => res.json(result))
     .catch(() => res.send({ error: "" }))
   } catch (error) {
