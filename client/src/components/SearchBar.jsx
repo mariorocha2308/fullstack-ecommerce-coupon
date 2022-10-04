@@ -23,7 +23,7 @@ const SearchBar = props => {
   
   return (
     <Box py='2'>
-      <Input placeholder='Search' fontWeight='semibold' value={input} onChange={onHandleInput}/>
+      <Input placeholder='Search' fontWeight='semibold' value={input} onChange={onHandleInput} variant='filled'/>
     </Box> 
   );
 }
