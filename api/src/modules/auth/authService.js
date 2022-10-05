@@ -9,7 +9,7 @@ const authRegister = async (req, res) => {
 
   try {
     const existUser = await User.findOne({raw : true, nest: true, where: {
-      [Op.or]: [{name}, {email}]
+      [Op.or]: [{name}, {email}, {phoneNumber}]
     }})
 
     if (existUser) {
