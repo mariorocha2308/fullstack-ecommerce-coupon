@@ -1,7 +1,5 @@
 import React from 'react';
-import { Box, Text, Icon, Stack, Circle, Stat, StatLabel, StatNumber, TagLabel, Tag } from '@chakra-ui/react';
-import { MdFavorite } from 'react-icons/md'
-import { RiShoppingBag3Fill} from 'react-icons/ri'
+import { Box, Text, Circle, Stat, StatLabel, StatNumber, TagLabel, Tag } from '@chakra-ui/react';
 import { couponColorizer } from '../utils/functions/couponColorizer'
 
 const Coupon = props => {
@@ -11,10 +9,7 @@ const Coupon = props => {
       <Circle size='11rem' bg={couponColorizer(props.discount)} color='white' position='absolute' top='-7' right='-8'>
       </Circle>
 
-      <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800' zIndex='toast'>
-        <Icon as={MdFavorite} cursor='pointer'/>
-        <Icon as={RiShoppingBag3Fill} cursor='pointer'/>
-      </Stack>
+      {props.children}
 
       <Stat>
         <StatLabel fontWeight='semibold'>UP TO</StatLabel>

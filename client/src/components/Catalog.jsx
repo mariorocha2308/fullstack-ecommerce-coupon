@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Grid, GridItem, Text, Icon } from '@chakra-ui/react';
-import { RiCoupon2Fill } from 'react-icons/ri'
+import { Box, Grid, GridItem, Text, Icon, Stack } from '@chakra-ui/react';
+import { RiCoupon2Fill, RiShoppingBag3Fill } from 'react-icons/ri'
+import { MdFavorite } from 'react-icons/md'
 import Coupon from './Coupon';
   
 const Catalog = props => {
@@ -21,7 +22,12 @@ const Catalog = props => {
               promoCode={coupon.promoCode} 
               discount={coupon.discount} 
               price={coupon.price}
-              stock={coupon.stock}/>
+              stock={coupon.stock}>
+                <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800' zIndex='toast'>
+                  <Icon as={MdFavorite} cursor='pointer'/>
+                  <Icon as={RiShoppingBag3Fill} cursor='pointer'/>
+                </Stack>
+              </Coupon>
           </GridItem>
         ))}
       </Grid>

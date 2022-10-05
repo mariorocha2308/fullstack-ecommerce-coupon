@@ -3,9 +3,11 @@ import { useQuery } from 'react-query'
 import { getCouponsQuery } from '../utils/apiQueries/coupon';
 import { Box } from '@chakra-ui/react'
 import SearchBar from '../components/SearchBar'
+import Categories from '../components/Categories';
 import HotSales from '../components/HotSales';
 import Catalog from '../components/Catalog';
 import Pagination from '../components/Pagination'
+import Landing from '../components/Landing';
 
 const Home = () => {
   
@@ -19,15 +21,16 @@ const Home = () => {
   
   return (
     <Box fontWeight='bold' fontSize='2xl'>
+      <Landing/>
       <SearchBar onReset={() => setCurrentPage(1)}/>
+      <Categories/>
       <HotSales data={coupons}/>
       <Catalog data={offsetCoupons}/>
       <Pagination
         currentPage={currentPage}
         dataLength={coupons?.length}
         pageSize={pageSize}
-        onPageChange={page => setCurrentPage(page)}
-      />
+        onPageChange={page => setCurrentPage(page)}/>
     </Box> 
   );
 }
