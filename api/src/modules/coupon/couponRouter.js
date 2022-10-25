@@ -1,9 +1,10 @@
 'use strict';
 const router = require('express').Router()
-const { getCoupons, findCoupons, getCoupon } = require("./couponService");
+const { getCoupons, findCoupons, getCoupon, filterCoupon } = require("./couponService");
 
-router.get('/', findCoupons)
 router.get('/all', getCoupons)
+router.get('/find', findCoupons)
+router.get('/filter', filterCoupon)
 router.get('/:code', getCoupon)
 
 module.exports = router;

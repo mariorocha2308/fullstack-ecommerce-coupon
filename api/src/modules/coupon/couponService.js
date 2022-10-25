@@ -42,8 +42,29 @@ const getCoupon = (req, res) => {
   }
 }
 
+const filterCoupon = (req, res) => {
+  const { type, discount, price } = req.query
+  // const [startDiscount, endDiscount] = discount?.split('-') ?? []
+  // const [startPrice, endPrice] = price?.split('-') ?? []
+
+  try {
+    Coupon.findAll({where: {
+      [Op.or]: [
+				{type: {[Op.iLike]: `%${type}%`}}, 
+				{discount: {[Op.between] : [30, 70]}},
+				// {price: {[Op.between] : [startPrice , endPrice ]}}
+			]
+    }})
+    .then(result => res.json(result))
+    .catch(() => res.send({ error: "" }))
+  } catch (error) {
+    return res.send({ error: "" })
+  }
+}
+
 module.exports = {
   getCoupons,
 	findCoupons,
-	getCoupon
+	getCoupon,
+  filterCoupon
 };
