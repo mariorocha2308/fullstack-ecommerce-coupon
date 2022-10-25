@@ -11,7 +11,7 @@ const getCouponsQuery = () => {
 
 const findCouponsQuery = (input) => {
   return new Promise((resolve, reject) => {
-    fetch(`${API_HOST}/coupon?match=${input}`)
+    fetch(`${API_HOST}/coupon/find?match=${input}`)
     .then(response => response.json())
     .then(result => resolve(result))
     .catch(() => reject('Failed to fetch match coupons'))

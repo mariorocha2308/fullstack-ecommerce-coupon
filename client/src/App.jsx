@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { useAuthStore } from './zustand/stores/authCreator'
+import { getItem } from 'react-safe-storage'
 
 import PrivateRoute from './components/PrivateRoute'
 import Login from './pages/Login'
@@ -8,6 +10,13 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 
 function App() {
+
+  const { setAuth } = useAuthStore()
+  const isStorage = getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user')
+
+  useEffect(() => {
+    if (isStorage) setAuth(true)
+  }, [])
 
   return (
     <Routes>
