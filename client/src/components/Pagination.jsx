@@ -1,8 +1,11 @@
 import React from 'react';
 import { Box, Button, ButtonGroup, IconButton } from '@chakra-ui/react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { usePaginationStore } from '../zustand/stores/paginationCreator';
 
-const Pagination = ({onPageChange, dataLength, currentPage, pageSize}) => {
+const Pagination = () => {
+
+  const { dataLength, pageSize, currentPage, setCurrentPage} = usePaginationStore()
 
   const siblingCount = 2
   const totalPageCount = Math.ceil(dataLength / pageSize);
@@ -14,31 +17,23 @@ const Pagination = ({onPageChange, dataLength, currentPage, pageSize}) => {
     return Array.from({ length }, (_, idx) => idx + start)
   }
 
-  const onNext = () => {
-    onPageChange(currentPage + 1);
-  }
-
-  const onPrevious = () => {
-    onPageChange(currentPage - 1);
-  }
-  
   return (
     <Box display='flex' py='4' justifyContent='center'>
       <ButtonGroup isAttached variant='outline'>
         {currentPage > 1 && (
-          <IconButton icon={<MdChevronLeft/>} onClick={onPrevious}/>
+          <IconButton icon={<MdChevronLeft/>} onClick={() => setCurrentPage(currentPage - 1)}/>
         )}
         {range(leftSiblingIndex, rightSiblingIndex).map(pageNumber => (
           <Button
             key={pageNumber}
             colorScheme={currentPage === pageNumber ? 'teal' : null}
             variant={currentPage === pageNumber ? 'solid' : 'outline'}
-            onClick={() => onPageChange(pageNumber)}>
+            onClick={() => setCurrentPage(pageNumber)}>
             {pageNumber}
           </Button>
         ))}
         {currentPage < totalPageCount && (
-          <IconButton icon={<MdChevronRight/>} onClick={onNext}/>
+          <IconButton icon={<MdChevronRight/>} onClick={() => setCurrentPage(currentPage + 1)}/>
         )}
       </ButtonGroup>
     </Box>

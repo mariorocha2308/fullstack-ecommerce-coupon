@@ -8,34 +8,40 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
+import { Box, useColorModeValue } from '@chakra-ui/react'
 
 function App() {
 
   const { setAuth } = useAuthStore()
   const isStorage = getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user')
 
+  // const bg = useColorModeValue('white', '#1E1E1E')
+  const color = useColorModeValue('blackAlpha.700', 'whiteAlpha')
+
   useEffect(() => {
     if (isStorage) setAuth(true)
   }, [])
 
   return (
-    <Routes>
-      <Route path="/" element={<Navbar/>}>
-        <Route path='/auth/login' element={
-          <PrivateRoute>
-            <Login/>
-          </PrivateRoute>
-        }/>
-        
-        <Route path='/auth/register' element={
-          <PrivateRoute>
-            <Register/>
-          </PrivateRoute>
-        }/>
+    <Box color={color}>
+      <Routes>
+        <Route path="/" element={<Navbar/>}>
+          <Route path='/auth/login' element={
+            <PrivateRoute>
+              <Login/>
+            </PrivateRoute>
+          }/>
+          
+          <Route path='/auth/register' element={
+            <PrivateRoute>
+              <Register/>
+            </PrivateRoute>
+          }/>
 
-        <Route index element={<Home/>}/>
-      </Route>
-    </Routes>
+          <Route index element={<Home/>}/>
+        </Route>
+      </Routes>
+    </Box>
   )
 }
 
