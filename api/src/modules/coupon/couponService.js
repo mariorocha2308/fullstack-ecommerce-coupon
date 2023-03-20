@@ -19,8 +19,8 @@ const getCoupons = (req, res) => {
 const findCoupons = (req, res) => {
   const { type, discount, price, page, pagesize } = req.query
 
-  const [startDiscount, endDiscount] = discount ? discount.split('-') : ''
-  const [startPrice, endPrice] = price ? price.split('-') : ''
+  const [startDiscount, endDiscount] = discount ? discount.join('-') : ''
+  const [startPrice, endPrice] = price ? price.join('-') : ''
   const offsetSize = (page - 1) * pagesize
 
   try {
