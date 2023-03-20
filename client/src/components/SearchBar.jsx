@@ -21,12 +21,12 @@ const SearchBar = () => {
   })
 
   useEffect(() => {
-    if (input.type || input.discount.length !== 0 || input.price.length !== 0) {
+    if (input.type || input.discount || input.price) {
       refetch()
     } else if (input.type === ''){
       setReset('RESET_FILTER', true)
     }
-  }, [refetch, input.type, currentPage, pageSize])
+  }, [refetch, input.type, currentPage, pageSize, input.price, input.discount.min, input.discount.max])
 
   const onHandleCategory = (item) => {
     setCurrentPage(1)
