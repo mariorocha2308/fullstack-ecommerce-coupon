@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 
 const usePaginationStore = create((set, get) => ({
   pageSize: 12,

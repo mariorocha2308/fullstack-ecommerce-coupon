@@ -15,8 +15,7 @@ function App() {
   const { setAuth } = useAuthStore()
   const isStorage = getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user')
 
-  // const bg = useColorModeValue('white', '#1E1E1E')
-  const color = useColorModeValue('blackAlpha.700', 'whiteAlpha')
+  const color = useColorModeValue('blackAlpha.800', 'whiteAlpha')
 
   useEffect(() => {
     if (isStorage) setAuth(true)

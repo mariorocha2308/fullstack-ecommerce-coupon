@@ -34,9 +34,7 @@ const authLogin = async (req, res) => {
   const { userTag, password } = req.body
 
   try {
-    const isAccount = await User.findOne({raw : true, nest: true, where: { 
-      [Op.or]: [{name: userTag}, {email: userTag}]
-    }})
+    const isAccount = await User.findOne({raw : true, nest: true, where: {email: userTag}})
 
     if (isAccount) {
       compare(password, isAccount.password)
@@ -62,7 +60,7 @@ const authLogin = async (req, res) => {
       return res.send({ error: 'The account does not exist' })
     }
   } catch (error) {
-    return res.send({ error: '' })
+    return res.send({ error: 'Error in server' })
   }
 }
 

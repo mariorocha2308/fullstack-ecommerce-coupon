@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 import { setItem } from 'react-safe-storage'
 
 const useAuthStore = create((set) => ({
@@ -8,8 +8,8 @@ const useAuthStore = create((set) => ({
     setItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user', JSON.stringify(objUser))
     set({ isAuth: true })
   },
-  logOut: (rol) => {
-    localStorage.removeItem(rol)
+  logOut: (key) => {
+    localStorage.removeItem(key)
     set({ isAuth: false })
   } 
 }))

@@ -10,14 +10,15 @@ const getCouponsQuery = (params) => {
 }
 
 const findCouponsQuery = (input, currentPage, pageSize) => {
-  console.log(input);
 
   const convertDiscount = Object.values(input.discount)
+  const convertPrice = Object.values(input.price)
 
   return new Promise((resolve, reject) => {
     fetch(`${API_HOST}/coupon/find?page=${currentPage}&pagesize=${pageSize}`.concat(
       input.type !== '' ? `&type=${input.type}` : '',
-      convertDiscount.includes(0) ? '' : `&discount${input.discount}`
+      input.discount ? `&discount=${convertDiscount}` : '',
+      input.price ? `&price=${convertPrice}` : ''
     ))
     .then(response => response.json())
     .then(result => resolve(result))

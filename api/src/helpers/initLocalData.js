@@ -1,10 +1,13 @@
 const { generateRandomTypes, generateRandomInteger } = require('./generator')
 const Coupon = require('../models/coupon')
-const Generator = require("ids-generator");
-const generator = new Generator();
+const ShortUniqueId = require('short-unique-id');
 
 const initLocalData = async () => {
 
+  const uid = new ShortUniqueId({ 
+    length: 10,
+    dictionary: 'alphanum_upper',
+  });
   const isData = await Coupon.findAll()
 
   if (isData.length === 0) {
@@ -12,7 +15,7 @@ const initLocalData = async () => {
       Coupon.create({
         title: "Coupon",
         type: generateRandomTypes(),
-        promoCode: `${generator.generate(6, "all").toUpperCase()}`,
+        promoCode: uid(),
         price: generateRandomInteger(5, 20),
         stock: generateRandomInteger(1, 6),
         discount: generateRandomInteger(5, 75)

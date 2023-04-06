@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Image, Input, Stack, Text } from '@chakra-ui/react';
-import portada from '../assets/cool-background.jpeg'
+import { Box, Input, Stack, Text, Button, Avatar, IconButton } from '@chakra-ui/react';
+import { TbCameraPlus } from 'react-icons/tb'
 
 const Register = () => {
 
   const [input, setInput] = useState({
-    image: 'https://ui-avatars.com/api/?name=Mario+Dev?background=33709b&color=fff',
+    image: '',
     name: '',
     email: '',
     phoneNumber: '',
@@ -17,20 +17,22 @@ const Register = () => {
   }
 
   return (  
-    <Box display='flex' alignItems='center' flexDirection='column'>
-      <Box w='100%' h='12rem' position='relative'>
-        <Image src={portada} borderRadius='10px'  objectFit='cover'  w='100%' h='100%'/>
-        <Avatar name={input.name} src={input.image} position='absolute' left='0' top='0' bottom='0' right='0' m='auto' size='xl'/>
+    <Box display='flex' alignItems='center' flexDirection='column' width='30%' margin='auto'>
+      <Text fontWeight='bold' fontSize='25px' py='2'>Get started</Text>
+      <Text fontWeight='semibold' fontSize='14' marginBottom='3rem' color='gray.500'>Create your account now</Text>
+
+      <Box display='flex' alignItems='flex-end' position='relative'>
+        <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='xl'/>
+        <IconButton aria-label='Chose local picture' icon={<TbCameraPlus fontSize='18px'/>} variant='solid' isRound position='absolute' right='-1' 
+        colorScheme='teal' size='sm' type='file'/>
       </Box>
-      <Text fontWeight='bold' fontSize='25px' py='2'>Create new account</Text>
-      <Stack spacing='5' w='70%'>
-        <Input placeholder='name' size='md' variant='filled' name='name' onChange={handleInput}/>
-        <Input placeholder='email' size='md' variant='filled' name='email' onChange={handleInput}/>
-        <Input placeholder='phone number' size='md' variant='filled' name='phoneNumber' onChange={handleInput}/>
-        <Input placeholder='password' size='md' variant='filled' name='password' onChange={handleInput}/>
-        <Input placeholder='repeat password' size='md' variant='filled'/>
-      </Stack>
-    </Box>
+      <Input placeholder='Name' size='md' variant='outline' name='name' onChange={handleInput}/>
+      <Input placeholder='Email' size='md' variant='outline' name='email' onChange={handleInput}/>
+      <Input placeholder='Phone number' size='md' variant='outline' name='phoneNumber' onChange={handleInput}/>
+      <Input placeholder='Password' size='md' variant='outline' name='password' onChange={handleInput}/>
+      <Input placeholder='Confirm password' size='md' variant='outline' name='confirm-password' onChange={handleInput}/>
+      <Button type='submit' colorScheme='teal' marginTop='10' w='100%'>Register</Button>
+    </Box> 
   );
 }
 

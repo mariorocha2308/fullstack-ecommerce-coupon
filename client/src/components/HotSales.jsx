@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Box, Stack, Text, Icon } from '@chakra-ui/react';
 import { FaHotjar } from 'react-icons/fa'
 import Coupon from './Coupon'
@@ -7,15 +6,7 @@ import { getHotSales } from '../utils/apiQueries/coupon';
 
 const HotSales = () => {
 
-  const [ hotsales, setHotSales ] = useState([])
-  useQuery(['hotsales'], getHotSales, {
-    onSuccess: (data) => {
-      setHotSales(data)
-    }
-  })
-
-  useEffect(() => {
-  }, [hotsales]);
+  const { data: hotsales, isLoading } = useQuery(['hotsales'], getHotSales)
 
   return ( 
     <Box py='4'>
