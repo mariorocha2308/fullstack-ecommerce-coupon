@@ -25,8 +25,8 @@ const Navbar = () => {
         <Box display='flex' alignItems='center' gap='5'>
           {
             colorMode === 'light' ?
-            <IconButton icon={<MdDarkMode size={23} cursor='pointer'/>} onClick={toggleColorMode} rounded='full' variant='ghost'/> :
-            <IconButton icon={<FaSun size={23} cursor='pointer'/>} onClick={toggleColorMode} rounded='full' variant='ghost'/>
+            <MdDarkMode size={23} cursor='pointer' onClick={toggleColorMode}/> :
+            <FaSun size={23} cursor='pointer' onClick={toggleColorMode}/>
             
           }
 
@@ -36,10 +36,10 @@ const Navbar = () => {
 
           {!isAuth && (
             <Stack spacing='3' direction='row' >
-              <Button variant='outline' size={{base: 'sm'}} colorScheme='teal' onClick={() => navigation('/auth/login')}>
+              <Button variant='outline' size={{base: 'sm'}} colorScheme='green' onClick={() => navigation('/auth/login')}>
                 Log in
               </Button>
-              <Button variant='solid' size={{base: 'sm'}} colorScheme='teal' onClick={() => navigation('/auth/register')}>
+              <Button variant='solid' size={{base: 'sm'}} colorScheme='green' onClick={() => navigation('/auth/register')}>
                 Register
               </Button>
             </Stack>

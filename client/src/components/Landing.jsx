@@ -9,7 +9,7 @@ const Landing = () => {
         <Text fontWeight='black' fontSize='35' mb='3'>Coupons!</Text>
         <Text width='400px'>For you, the best hot sales rigth now. Enjoy, buy now!</Text>
       </Box>
-      <Image src={image} height='300px'/>
+      <Image src={image} height='300px' alt='halloween coupons'/>
     </Box>
   );
 }
