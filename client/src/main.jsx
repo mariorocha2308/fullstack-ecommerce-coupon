@@ -11,7 +11,8 @@ import './index.css'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      refetchOnMount: false
     }
   }
 })
@@ -22,7 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <ColorModeScript initialColorMode={theme.initialColorMode} />
         <App/>
-        <ReactQueryDevtools/>
       </BrowserRouter>
     </QueryClientProvider>
   </ChakraProvider>

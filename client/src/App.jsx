@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy } from 'react'
+import { Box, useColorModeValue } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom'
 import { useAuthStore } from './zustand/stores/authCreator'
 import { getItem } from 'react-safe-storage'
 
-import PrivateRoute from './components/PrivateRoute'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import { Box, useColorModeValue } from '@chakra-ui/react'
+//* PAGES
+const Home = lazy(() => import('./pages/Home'))
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+
+//* COMPONENTS
+const PrivateRoute = lazy(() => import('./components/PrivateRoute'))
+const Navbar = lazy(() => import('./components/Navbar'))
+const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
 
@@ -22,23 +26,28 @@ function App() {
   }, [])
 
   return (
-    <Box color={color}>
+    <Box color={color} bg='#F8F9F9'>
       <Routes>
-        <Route path="/" element={<Navbar/>}>
-          <Route path='/auth/login' element={
-            <PrivateRoute>
-              <Login/>
-            </PrivateRoute>
-          }/>
-          
-          <Route path='/auth/register' element={
-            <PrivateRoute>
-              <Register/>
-            </PrivateRoute>
-          }/>
-
+        <Route parth='/' element={
+          <>
+            <Navbar/>
+            <Footer/>
+          </>
+        }>
           <Route index element={<Home/>}/>
         </Route>
+
+        <Route path='/auth/login' element={
+          <PrivateRoute>
+            <Login/>
+          </PrivateRoute>
+        }/>
+        
+        <Route path='/auth/register' element={
+          <PrivateRoute>
+            <Register/>
+          </PrivateRoute>
+        }/>
       </Routes>
     </Box>
   )

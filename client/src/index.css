@@ -1,24 +1,67 @@
+:root{
+  background-color: #F8F9F9;
+}
+
 body {
-  margin: 0;
+  margin: 0px;
+  padding: 0px;
 }
 
- /* width */
-::-webkit-scrollbar {
-  width: 12px;
+/* Lazy Load Global */
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #EBEDEF;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  border-radius: 5px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  border-radius: 5px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  border-radius: 5px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f100;
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('./fonts/poppins-bold-webfont.woff2');
+  font-display: swap;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0);
-  border-radius: 10px;
+@font-face {
+  font-family: 'Monserrat';
+  src: url('./fonts/MontserratSubrayada-Bold.woff2');
+  font-display: swap;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-} 
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('./fonts/poppins-regular-webfont.woff2');
+  font-display: swap;
+}
