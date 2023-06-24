@@ -21,10 +21,6 @@ const Coupon = sequelize.define('coupon', {
     type: DataTypes.BIGINT,
     allowNull: false
   },
-  stock: {
-    type: DataTypes.SMALLINT,
-    allowNull: false
-  },
   discount: {
     type: DataTypes.SMALLINT,
     allowNull: false

@@ -11,13 +11,12 @@ const initLocalData = async () => {
   const isData = await Coupon.findAll()
 
   if (isData.length === 0) {
-    for (let i = 0; i < 180; i++) {
+    for (let i = 0; i < 250; i++) {
       Coupon.create({
         title: "Coupon",
         type: generateRandomTypes(),
         promoCode: uid(),
         price: generateRandomInteger(5, 20),
-        stock: generateRandomInteger(1, 6),
         discount: generateRandomInteger(5, 75)
       })
     }
