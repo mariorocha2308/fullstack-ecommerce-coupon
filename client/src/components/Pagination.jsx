@@ -18,7 +18,7 @@ const Pagination = () => {
   }
 
   return (
-    <Box display='flex' py='4' justifyContent='center'>
+    <Box display='flex' m1='1rem' mb='4rem' justifyContent='center'>
       <ButtonGroup isAttached variant='outline'>
         {currentPage > 1 && (
           <IconButton icon={<MdChevronLeft/>} onClick={() => setCurrentPage(currentPage - 1)}/>
@@ -26,7 +26,7 @@ const Pagination = () => {
         {range(leftSiblingIndex, rightSiblingIndex).map(pageNumber => (
           <Button
             key={pageNumber}
-            colorScheme={currentPage === pageNumber ? 'green' : null}
+            colorScheme={currentPage === pageNumber ? 'teal' : null}
             variant={currentPage === pageNumber ? 'solid' : 'outline'}
             onClick={() => setCurrentPage(pageNumber)}>
             {pageNumber}
