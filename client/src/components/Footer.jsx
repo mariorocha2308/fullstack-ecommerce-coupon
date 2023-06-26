@@ -1,11 +1,38 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Link, Divider } from "@chakra-ui/react";
+import { FaLinkedin, FaSquareGithub } from 'react-icons/fa6'
 
 const Footer = () => {
 
   return (  
-    <Box h='18rem' bg='white'>
-      <Box maxWidth='1200px' margin='auto'>
-        <Text>Este es nuestro footer</Text>
+    <Box h='22rem' bg='white'>
+      <Box display='flex' flexDirection='column' py='2.5rem' boxSizing='border-box' h='100%' justifyContent='space-between'
+        maxWidth='1200px' w='1200px' margin='auto'>
+        <Text fontFamily='Monserrat'>CPNSTORE</Text>
+
+        <Box display='flex' justifyContent='space-between'>
+          <Box w='300px' textAlign='start'>
+            <Text fontFamily='Poppins-Bold' mb='1rem'>Support</Text>
+          </Box>
+
+          <Box w='300px' textAlign='center'>
+            <Text fontFamily='Poppins-Bold' mb='1rem'>FAQS</Text>
+          </Box>
+
+          <Box w='300px' textAlign='end'>
+            <Text fontFamily='Poppins-Bold' mb='1rem'>Account</Text>
+            <Text fontSize='14px'>Favorites</Text>
+            <Text fontSize='14px'>Wishlist</Text>
+          </Box>
+        </Box>
+
+        <Box>
+          <Divider mb='0.5rem'/>
+          <Text color='blackAlpha.700' fontSize='13px' textAlign='end'> created by Mario Rocha, 2023</Text>
+          <Box display='flex' justifyContent='flex-end' gap='1rem' mt='0.5rem'>
+            <FaLinkedin fontSize='25px'/> <FaSquareGithub fontSize='25px'/>
+          </Box>
+        </Box>
+
       </Box>
     </Box>
   );
