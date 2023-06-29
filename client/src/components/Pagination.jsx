@@ -20,9 +20,7 @@ const Pagination = () => {
   return (
     <Box display='flex' m1='1rem' mb='4rem' justifyContent='center'>
       <ButtonGroup isAttached variant='outline'>
-        {currentPage > 1 && (
-          <IconButton icon={<MdChevronLeft/>} onClick={() => setCurrentPage(currentPage - 1)}/>
-        )}
+        <IconButton icon={<MdChevronLeft/>} onClick={() => setCurrentPage(currentPage - 1)} isDisabled={currentPage === 1}/>
         {range(leftSiblingIndex, rightSiblingIndex).map(pageNumber => (
           <Button
             key={pageNumber}
@@ -32,9 +30,7 @@ const Pagination = () => {
             {pageNumber}
           </Button>
         ))}
-        {currentPage < totalPageCount && (
-          <IconButton icon={<MdChevronRight/>} onClick={() => setCurrentPage(currentPage + 1)}/>
-        )}
+        <IconButton icon={<MdChevronRight/>} onClick={() => setCurrentPage(currentPage + 1)} isDisabled={currentPage === totalPageCount}/>
       </ButtonGroup>
     </Box>
   );

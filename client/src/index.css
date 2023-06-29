@@ -50,18 +50,24 @@ body {
 
 @font-face {
   font-family: 'Poppins-Bold';
-  src: url('./fonts/poppins-bold-webfont.woff2');
+  src: url('./fonts/Poppins-Bold.woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('./fonts/Poppins-Medium.woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('./fonts/Poppins-Regular.woff2');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Monserrat';
   src: url('./fonts/MontserratSubrayada-Bold.woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins-Regular';
-  src: url('./fonts/poppins-regular-webfont.woff2');
   font-display: swap;
 }
