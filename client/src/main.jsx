@@ -14,8 +14,7 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       keepPreviousData: true,
-      staleTime: 5*(60*1000), // 5 mins
-      cacheTime: 10*(60*1000), // 10 mins
+      staleTime: 30 * 1000, // 20 seconds
     }
   }
 })
@@ -26,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <ColorModeScript initialColorMode={theme.initialColorMode} />
         <App/>
+        <ReactQueryDevtools/>
       </BrowserRouter>
     </QueryClientProvider>
   </ChakraProvider>

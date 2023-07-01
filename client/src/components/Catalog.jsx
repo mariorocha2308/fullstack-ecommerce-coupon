@@ -10,7 +10,7 @@ const Catalog = () => {
 
   const { currentPage, pageSize, setDataLength } = usePaginationStore()
   const { RESET_FILTER } = useResetManangerStore()
-  const { data: coupons, refetch } = useQuery(['coupons'], () => getCouponsQuery({currentPage, pageSize}), {
+  const { data: coupons, refetch } = useQuery(['coupons', currentPage], () => getCouponsQuery({currentPage, pageSize}), {
     onSuccess: (data) => {
       setDataLength(data?.count)
     }
@@ -18,7 +18,7 @@ const Catalog = () => {
 
   useEffect(() => {
     refetch()
-  }, [currentPage, coupons, RESET_FILTER]);
+  }, [RESET_FILTER]);
 
   return ( 
     <Box my='2rem'>
