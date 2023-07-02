@@ -19,10 +19,10 @@ const Footer = () => {
 
           <Box w='300px' textAlign='end'>
             <Text fontFamily='Poppins-Bold' mb='1rem'>Account</Text>
-            <Text fontSize='14px'>Favorites</Text>
+            {/* <Text fontSize='14px'>Favorites</Text>
             <Text fontSize='14px'>Wishlist</Text>
             <Text fontSize='14px'>Notifications</Text>
-            <Text fontSize='14px'>History Shop</Text>
+            <Text fontSize='14px'>History Shop</Text> */}
           </Box>
         </Box>
 
@@ -33,7 +33,6 @@ const Footer = () => {
             <FaLinkedin fontSize='25px'/> <FaSquareGithub fontSize='25px'/>
           </Box>
         </Box>
-
       </Box>
     </Box>
   );

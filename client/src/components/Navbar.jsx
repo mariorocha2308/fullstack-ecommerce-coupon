@@ -7,7 +7,7 @@ import { useAuthStore } from '../zustand/stores/authCreator';
 // import { HiOutlineTicket } from 'react-icons/hi'
 // import { MdDarkMode } from 'react-icons/md';
 // import { FaSun } from 'react-icons/fa';
-import LazyGlobal from './LazyGlobal';
+import Loader from './Loader';
 
 const Navbar = () => {
 
@@ -53,7 +53,7 @@ const Navbar = () => {
                 </Box>
                 
               </Box> */}
-        <Suspense fallback={<LazyGlobal/>}>
+        <Suspense fallback={<Loader/>}>
           <Box maxWidth='1200px' margin='auto' pt='10vh'>
             <Outlet/>
           </Box> 

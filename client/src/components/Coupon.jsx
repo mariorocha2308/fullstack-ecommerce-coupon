@@ -1,13 +1,14 @@
 import React from 'react';
 import { RiShoppingBag3Fill } from 'react-icons/ri'
 import { MdFavorite } from 'react-icons/md'
-import { Box, Text, Circle, Stat, StatLabel, StatNumber, Stack, Icon } from '@chakra-ui/react';
+import { Box, Text, Circle, Stack, Icon } from '@chakra-ui/react';
 import { couponColorizer } from '../utils/functions/couponColorizer'
 
 const Coupon = props => {
 
   return (
-    <Box display='flex' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' overflow='hidden' boxSizing='border-box' p='4' flexDirection='column' minW='230px' maxW={{base: '100%', lg:'230px'}} bg='white'>
+    <Box display='flex' flexDirection='column' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' 
+      overflow='hidden' boxSizing='border-box' p='4' minW='230px' bg='white' justifyContent='flex-end'>
       <Circle size='11rem' bg={couponColorizer(props.discount)} color='white' position='absolute' top='-7' right='-8'>
       </Circle>
 
@@ -16,16 +17,15 @@ const Coupon = props => {
         <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px'/>
       </Stack>
 
-      <Stat>
-        <StatLabel>{props.titleDiscount}</StatLabel>
-        <Text fontSize='16px' fontFamily='Poppins-Bold'>{props.discount}%</Text>
-      </Stat>
-      <Stat>
-        <StatLabel>Price</StatLabel>
-        <Text fontSize='16px' fontFamily='Poppins-Bold'>${props.price}</Text>
-      </Stat>
-
       <Text fontSize='20px' fontFamily='Poppins-Bold'>{props.type}</Text>
+      <Box display='flex' w='100%' h='5vh' alignItems='center' borderColor='blackAlpha.900' border='2px' borderRadius='5px' mt='0.5rem'>
+        <Box display='flex' alignItems='center' justifyContent='center' w='50%' bgColor='blackAlpha.900' h='100%' color='white'>
+          <Text fontSize='16px' fontFamily='Poppins-Bold'>${props.price}</Text>
+        </Box>
+        <Box display='flex' alignItems='center' justifyContent='center' w='50%' textAlign='center' h='100%'>
+          <Text fontSize='16px' fontFamily='Poppins-Bold'>{props.discount}%</Text>
+        </Box>
+      </Box>
     </Box>
   );
 }

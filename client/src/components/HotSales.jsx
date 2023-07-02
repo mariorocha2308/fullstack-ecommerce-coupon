@@ -6,7 +6,7 @@ import { getHotSales } from '../utils/apiQueries/coupon';
 
 const HotSales = () => {
 
-  const { data: hotsales, isLoading } = useQuery(['hotsales'], getHotSales)
+  const { data: hotsales } = useQuery(['hotsales'], getHotSales)
 
   return ( 
     <Box py='4'>
@@ -22,7 +22,6 @@ const HotSales = () => {
             title={coupon.title} 
             type={coupon.type} 
             promoCode={coupon.promoCode} 
-            titleDiscount='PRO'
             discount={coupon.discount} 
             price={coupon.price}
             stock={coupon.stock}/>

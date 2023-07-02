@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react'
 import Landing from '../components/Landing';
-import Catalog from '../components/Catalog';
+import Catalogue from '../components/Catalogue';
 import Pagination from '../components/Pagination'
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <Box>
       <Landing/>
-      <Catalog/>
+      <Catalogue/>
       <Pagination/>
     </Box> 
   );
