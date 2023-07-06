@@ -6,12 +6,12 @@ const Landing = () => {
   return (  
     <Box display='flex' py='10' justifyContent='space-evenly' alignItems='center'>
       <Box display='column' >
-        <Text fontSize='30' mb='3' fontFamily='Monserrat'>Coupons Store!</Text>
-        <Text width='400px' fontFamily='Poppins-Bold' mb='0.5rem'>
+        <Text fontSize='35px' mb='3' fontFamily='Poppins-Bold'>Coupons Store!</Text>
+        <Text width='400px' fontFamily='Poppins-Bold' mb='0.5rem' fontSize='18px'>
           Enjoy 24/7 special offers on our platform, 
-          we want you to be able to live reactively! 
+          we want you to be able to live reactively!. Click on categories to discover hotsales 
         </Text>
-        <Text width='400px' fontFamily='Poppins-Bold'>This and more benefits for our users.</Text>
+        <Text width='400px' fontFamily='Poppins-Bold' fontSize='18px'>This and more benefits for our users.</Text>
       </Box>
       <Image src={image} height='300px' alt='halloween coupons'/>
     </Box>
