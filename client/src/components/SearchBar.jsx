@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Divider, Input, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react';
-import { RiArrowDownSLine } from 'react-icons/ri'
+import { Box, Divider, Input, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, Text } from '@chakra-ui/react';
 import { findCouponsQuery } from '../utils/apiQueries/coupon'
 import { useResetManangerStore } from '../zustand/stores/useResetManager';
 import { useQuery } from 'react-query'
-import Categories from './Categories'
 import { usePaginationStore } from '../zustand/stores/paginationCreator';
+import { categories } from '../utils/constants/categories';
 
 const SearchBar = () => {
 
@@ -39,14 +38,25 @@ const SearchBar = () => {
   const onHandleRange = (e) => {
     setInput({...input, [e.target.id]: { ...input[e.target.id], [ e.target.name ]: Number(e.target.value) }})
   } 
-  
-  return (
-    <Box display='flex' py='2' justifyContent='space-between' alignItems='center' mt='7'>
 
-      <Categories onCategory={onHandleCategory} currentCategory={input.type}/>
+  return (
+    <Box display='flex' gap='2rem'>
+      <Menu closeOnSelect={false}>
+        <MenuButton>
+          Categories
+        </MenuButton>
+        <MenuList minWidth='240px'>
+          <MenuOptionGroup defaultValue='' type='radio' onClick={onHandleCategory}>
+            <MenuItemOption value=''>All</MenuItemOption>
+            {categories.map((category, idx )=> {
+              return <MenuItemOption value={category} key={idx}>{category}</MenuItemOption>
+            })}
+          </MenuOptionGroup>
+        </MenuList>
+      </Menu>
 
       <Menu>
-        <MenuButton as={Button} rightIcon={<RiArrowDownSLine/>}>
+        <MenuButton>
           Sort By
         </MenuButton>
         <MenuList p='4' width='230px' fontWeight='semibold' zIndex={2} gap='5'>

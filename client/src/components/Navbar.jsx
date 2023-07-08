@@ -5,8 +5,9 @@ import { getItem } from 'react-safe-storage';
 import { useAuthStore } from '../zustand/stores/authCreator';
 // import AvatarMenu from './AvatarMenu';
 // import { HiOutlineTicket } from 'react-icons/hi'
-// import { MdDarkMode } from 'react-icons/md';
-// import { FaSun } from 'react-icons/fa';
+import { MdDarkMode } from 'react-icons/md';
+import { FaSun } from 'react-icons/fa';
+import SearchBar from './SearchBar';
 import Loader from './Loader';
 
 const Navbar = () => {
@@ -20,8 +21,11 @@ const Navbar = () => {
   return (
     <Box>
       <Box boxShadow='sm' height='8vh' bg='white' w='100vw' zIndex='2' position='fixed'>
-        <Box display='flex' alignItems='center' maxWidth='1200px' margin='auto' h='100%'>
-          <Text fontFamily='Monserrat' fontSize='20px'>CPNSTORE</Text>
+        <Box display='flex' alignItems='center' maxWidth='1200px' margin='auto' h='100%' w='1200px'>
+          <Box display='flex' gap='3rem'>
+            <Text fontFamily='Monserrat'>CPNSTORE</Text>
+            <SearchBar/>
+          </Box>
         </Box>
       </Box>
 
@@ -29,12 +33,6 @@ const Navbar = () => {
           <HiOutlineTicket fontSize='30' onClick={() => navigation('/')} cursor='pointer'/>
           
           <Box display='flex' alignItems='center' gap='5'>
-          {
-            colorMode === 'light' ?
-            <MdDarkMode size={23} cursor='pointer' onClick={toggleColorMode}/> :
-            <FaSun size={23} cursor='pointer' onClick={toggleColorMode}/>
-            
-          }
           
           {isAuth && (
             <AvatarMenu image={user.image} logOut={() => logOut('user')} rol={user.role} name={user.userName}/>
