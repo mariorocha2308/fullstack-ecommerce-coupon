@@ -21,7 +21,7 @@ const Navbar = () => {
     <Box>
       <Box boxShadow='sm' height='8vh' bg='white' w='100vw' zIndex='2' position='fixed'>
         <Box display='flex' alignItems='center' maxWidth='1200px' margin='auto' h='100%'>
-          <Text fontFamily='Monserrat'>CPNSTORE</Text>
+          <Text fontFamily='Monserrat' fontSize='20px'>CPNSTORE</Text>
         </Box>
       </Box>
 
