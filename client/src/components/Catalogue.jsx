@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { getCouponsQuery } from '../utils/apiQueries/coupon';
 import { usePaginationStore } from '../zustand/stores/paginationCreator';
 import { useResetManangerStore } from '../zustand/stores/useResetManager';
+import SortCoupons from './SortCoupons'
 import Coupon from './Coupon';
 
 const Catalog = () => {
@@ -22,7 +23,10 @@ const Catalog = () => {
 
   return ( 
     <Box my='2rem'>
-      <Text fontFamily='Poppins-Bold' fontSize='25px' mb='2rem'>Catalogue</Text>
+      <Box display='flex'  justifyContent='space-between' mb='2rem'>
+        <Text fontFamily='Poppins-Bold' fontSize='25px' >Catalogue</Text>
+        <SortCoupons/>
+      </Box>
       <Grid gap='8' 
         templateColumns={['repeat(1, 100%)','repeat(1, 70%)', 'repeat(2, 45%)', 'repeat(3, 230px)','repeat(4, 230px)']} 
         templateRows='repeat(3, 17rem)' py='4' justifyContent={{base: 'center', sm: 'center', lg: 'space-between'}} w='100%' minHeight='912px'>

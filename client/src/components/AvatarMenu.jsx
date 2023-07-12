@@ -1,6 +1,5 @@
 import { Avatar, Badge, Box, Menu, MenuButton, MenuItem, MenuList, Stack, Text, AvatarBadge } from '@chakra-ui/react';
 import { MdOutlineLogout } from 'react-icons/md'
-import React from 'react';
 
 const AvatarMenu = props => {
 
@@ -12,7 +11,7 @@ const AvatarMenu = props => {
             <Text fontWeight='bold' textTransform='capitalize' >{props.name}</Text>
             <Badge colorScheme='green' fontSize='10px'>{props.rol}</Badge>
           </Box>
-          <Avatar size='md' src={props.image}>
+          <Avatar size='sm' src={props.image}>
             <AvatarBadge boxSize='1rem' bg='green.500' />
           </Avatar>
         </Stack>
