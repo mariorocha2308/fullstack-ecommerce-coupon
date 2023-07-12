@@ -5,9 +5,9 @@ import { getItem } from 'react-safe-storage';
 import { useAuthStore } from '../zustand/stores/authCreator';
 // import AvatarMenu from './AvatarMenu';
 // import { HiOutlineTicket } from 'react-icons/hi'
-import { MdDarkMode } from 'react-icons/md';
-import { FaSun } from 'react-icons/fa';
-import SearchBar from './SearchBar';
+// import { MdDarkMode } from 'react-icons/md';
+// import { FaSun } from 'react-icons/fa';
+import FilterAndSort from './FilterAndSort';
 import Loader from './Loader';
 
 const Navbar = () => {
@@ -24,7 +24,7 @@ const Navbar = () => {
         <Box display='flex' alignItems='center' maxWidth='1200px' margin='auto' h='100%' w='1200px'>
           <Box display='flex' gap='3rem'>
             <Text fontFamily='Monserrat'>CPNSTORE</Text>
-            <SearchBar/>
+            <FilterAndSort/>
           </Box>
         </Box>
       </Box>

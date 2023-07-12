@@ -6,7 +6,7 @@ import { useQuery } from 'react-query'
 import { usePaginationStore } from '../zustand/stores/paginationCreator';
 import { categories } from '../utils/constants/categories';
 
-const SearchBar = () => {
+const FilterAndSort = () => {
 
   const { setReset } = useResetManangerStore()
   const { currentPage, pageSize, setCurrentPage } = usePaginationStore()
@@ -15,7 +15,7 @@ const SearchBar = () => {
     discount: { min: 5, max: 75 },
     price: { min: 5, max: 25 }
   })
-  const { refetch } = useQuery(['coupons'], () => findCouponsQuery(input, currentPage, pageSize), {
+  const { refetch } = useQuery(['coupons', currentPage], () => findCouponsQuery(input, currentPage, pageSize), {
     enabled: false
   })
 
@@ -46,10 +46,11 @@ const SearchBar = () => {
           Categories
         </MenuButton>
         <MenuList minWidth='240px'>
-          <MenuOptionGroup defaultValue='' type='radio' onClick={onHandleCategory}>
-            <MenuItemOption value=''>All</MenuItemOption>
+          <MenuOptionGroup defaultValue='' type='radio'>
+            <MenuItemOption value='' onClick={() => onHandleCategory('')}>All</MenuItemOption>
             {categories.map((category, idx )=> {
-              return <MenuItemOption value={category} key={idx}>{category}</MenuItemOption>
+              return <MenuItemOption value={category} key={idx}
+                onClick={() => onHandleCategory(category)}>{category}</MenuItemOption>
             })}
           </MenuOptionGroup>
         </MenuList>
@@ -57,7 +58,7 @@ const SearchBar = () => {
 
       <Menu>
         <MenuButton>
-          Sort By
+          Sort by
         </MenuButton>
         <MenuList p='4' width='230px' fontWeight='semibold' zIndex={2} gap='5'>
           {/* PRICE */}
@@ -80,4 +81,4 @@ const SearchBar = () => {
   );
 }
 
-export default SearchBar;
+export default FilterAndSort;
