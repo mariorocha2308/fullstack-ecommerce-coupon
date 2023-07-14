@@ -1,17 +1,15 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom'
-import { Box, Text } from '@chakra-ui/react'
-// import { getItem } from 'react-safe-storage';
-// import { useAuthStore } from '../zustand/stores/authCreator';
-import AvatarMenu from './AvatarMenu';
+import { Box, Button, Text } from '@chakra-ui/react'
+import { useAuthStore } from '../zustand/stores/authCreator';
 import Loader from './Loader';
+
+const AvatarMenu = lazy(() => import('./AvatarMenu'))
 
 const Navbar = () => {
 
   const navigation = useNavigate()
-
-  // const { isAuth, logOut } = useAuthStore()
-  // const user = JSON.parse(getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user'))
+  const { isAuth } = useAuthStore()
   
   return (
     <Box>
@@ -20,16 +18,23 @@ const Navbar = () => {
           <Box display='flex' gap='3rem'>
             <Text fontFamily='Monserrat' onClick={() => navigation('/')} cursor='pointer'>CPNSTORE</Text>
           </Box>
-          <Box>
-            <AvatarMenu/>
-          </Box>
+            <Box>
+              {!isAuth 
+              ? <Box display='flex' gap='1rem'>
+                <Button colorScheme='purple' size='sm' variant='ghost' 
+                  onClick={() => navigation('/auth/login')}>Login</Button>
+                <Button colorScheme='purple' size='sm' variant='solid' 
+                  onClick={() => navigation('/auth/register')}>Register</Button>
+              </Box>
+              : <AvatarMenu/>}
+            </Box>
         </Box>
       </Box>
-        <Suspense fallback={<Loader/>}>
-          <Box maxWidth='1200px' margin='auto' pt='10vh'>
-            <Outlet/>
-          </Box> 
-        </Suspense>
+      <Suspense fallback={<Loader/>}>
+        <Box maxWidth='1200px' margin='auto' pt='10vh'>
+          <Outlet/>
+        </Box> 
+      </Suspense>
     </Box>
   );
 }

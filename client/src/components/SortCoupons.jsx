@@ -3,7 +3,7 @@ import { Box, Divider, IconButton, Input, Menu, MenuButton, MenuItemOption, Menu
 import { findCouponsQuery } from '../utils/apiQueries/coupon'
 import { useResetManangerStore } from '../zustand/stores/useResetManager';
 import { useQuery } from 'react-query'
-import { RiEqualizerFill } from 'react-icons/ri'
+import { RiEqualizerFill, RiStackFill } from 'react-icons/ri'
 import { usePaginationStore } from '../zustand/stores/paginationCreator';
 import { categories } from '../utils/constants/categories';
 
@@ -41,28 +41,46 @@ const FilterAndSort = () => {
   } 
 
   return (
-    <Menu>
-      <MenuButton as={IconButton}
-        variant='outline'
-        aria-label='Sort Coupons'
-        icon={<RiEqualizerFill/>}/>
-      <MenuList p='4' width='230px' fontWeight='semibold' zIndex={2} gap='5'>
-        {/* PRICE */}
-        <Text fontSize='sm'>Price 5-25</Text>
-        <Box display='flex' py='2' alignItems='center'>
-          <Input type='number' placeholder='min' max={5} name='min' id='price' onChange={onHandleRange}/>
-          <Divider width='100px' marginX='2'/>
-          <Input type='number' placeholder='max' max={25} name='max' id='price' onChange={onHandleRange}/>
-        </Box>
-        {/* DISCOUNT */}
-        <Text fontSize='sm'>Discount 5-75</Text>
-        <Box display='flex' py='2' alignItems='center'>
-          <Input type='number' placeholder='min' name='min' id='discount' onChange={onHandleRange}/>
-          <Divider width='100px' marginX='2'/>
-          <Input type='number' placeholder='max' name='max' id='discount' onChange={onHandleRange}/>
-        </Box>
-      </MenuList>
-    </Menu>
+    <Box display='flex' gap='0.5rem'>
+      <Menu>
+        <MenuButton as={IconButton}
+          variant='outline'
+          aria-label='Filter Coupons'
+          icon={<RiStackFill/>}/>
+        <MenuList minWidth='240px'>
+          <MenuOptionGroup defaultValue='' type='radio'>
+            <MenuItemOption value='' onClick={() => onHandleCategory('')}>All</MenuItemOption>
+            {categories.map((category, idx ) => (
+              <MenuItemOption value={category} key={idx}
+                onClick={() => onHandleCategory(category)}>{category}</MenuItemOption>
+            ))}
+          </MenuOptionGroup>
+        </MenuList>
+      </Menu>
+
+      <Menu>
+        <MenuButton as={IconButton}
+          variant='outline'
+          aria-label='Sort Coupons'
+          icon={<RiEqualizerFill/>}/>
+        <MenuList p='4' width='230px' fontWeight='semibold' zIndex={2} gap='5'>
+          {/* PRICE */}
+          <Text fontSize='sm'>Price 5-25</Text>
+          <Box display='flex' py='2' alignItems='center'>
+            <Input type='number' placeholder='min' max={5} name='min' id='price' onChange={onHandleRange}/>
+            <Divider width='100px' marginX='2'/>
+            <Input type='number' placeholder='max' max={25} name='max' id='price' onChange={onHandleRange}/>
+          </Box>
+          {/* DISCOUNT */}
+          <Text fontSize='sm'>Discount 5-75</Text>
+          <Box display='flex' py='2' alignItems='center'>
+            <Input type='number' placeholder='min' name='min' id='discount' onChange={onHandleRange}/>
+            <Divider width='100px' marginX='2'/>
+            <Input type='number' placeholder='max' name='max' id='discount' onChange={onHandleRange}/>
+          </Box>
+        </MenuList>
+      </Menu>
+    </Box>
   );
 }
 
