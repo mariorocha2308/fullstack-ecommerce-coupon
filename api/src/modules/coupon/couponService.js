@@ -4,33 +4,20 @@ const Review = require('../../models/review')
 const User = require('../../models/user')
 
 const getCoupons = (req, res) => {
-  const { page, pagesize } = req.query
-  const offsetSize = (page - 1) * pagesize
-
-  try {
-    Coupon.findAndCountAll({ include: [Review, User], offset: offsetSize, limit: pagesize })
-    .then(result => res.json(result))
-    .catch(() => res.send({ error: "" }))
-  } catch (error) {
-    return res.send({ error: "" })
-  }
-}
-
-const findCoupons = (req, res) => {
   const { type, discount, price, page, pagesize } = req.query
 
+  const offsetSize = (page - 1) * pagesize
   const [startDiscount, endDiscount] = discount ? discount.split(',') : ''
   const [startPrice, endPrice] = price ? price.split(',') : ''
-  const offsetSize = (page - 1) * pagesize
 
   try {
-    Coupon.findAndCountAll({where: {
+    Coupon.findAndCountAll({ include: [Review, User], offset: offsetSize, limit: pagesize, where: {
       [Op.and]: [ 
         type ? {type: {[Op.iLike]: `%${type}%`}} : '',
 				discount ? {discount: {[Op.between] : [startDiscount, endDiscount]}} : '',
         price ? {price: {[Op.between] : [startPrice , endPrice]}} : ''
 			]
-		}, offset: offsetSize, limit: pagesize})
+		}})
     .then(result => res.json(result))
     .catch(() => res.send({ error: "" }))
   } catch (error) {
@@ -65,7 +52,6 @@ const getHotSales = (_, res) => {
 
 module.exports = {
   getCoupons,
-	findCoupons,
 	getCoupon,
   getHotSales
 };
