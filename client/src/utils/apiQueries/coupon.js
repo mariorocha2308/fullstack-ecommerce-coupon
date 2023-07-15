@@ -1,28 +1,18 @@
 const API_HOST = import.meta.env.VITE_API_HOST
 
 const getCouponsQuery = (params) => {
-  return new Promise((resolve, reject) => {
-    fetch(`${API_HOST}/coupon/all?page=${params.currentPage}&pagesize=${params.pageSize}`)
-    .then(response => response.json())
-    .then(result => resolve(result))
-    .catch(() => reject('Failed to fetch coupons'))
-  })
-}
-
-const findCouponsQuery = (input, currentPage, pageSize) => {
-
-  const convertDiscount = Object.values(input.discount)
-  const convertPrice = Object.values(input.price)
+  // const convertDiscount = Object.values(params.input.discount)
+  // const convertPrice = Object.values(params.input.price)
 
   return new Promise((resolve, reject) => {
-    fetch(`${API_HOST}/coupon/find?page=${currentPage}&pagesize=${pageSize}`.concat(
-      input.type !== '' ? `&type=${input.type}` : '',
-      input.discount ? `&discount=${convertDiscount}` : '',
-      input.price ? `&price=${convertPrice}` : ''
+    fetch(`${API_HOST}/coupon/all?page=${params.currentPage}&pagesize=${params.pageSize}`.concat(
+      params.input.type !== '' ? `&type=${params.input.type}` : '',
+      // params.input.discount ? `&discount=${convertDiscount}` : '',
+      // params.input.price ? `&price=${convertPrice}` : ''
     ))
     .then(response => response.json())
     .then(result => resolve(result))
-    .catch(() => reject('Failed to fetch match coupons'))
+    .catch(() => reject('Failed to fetch coupons'))
   })
 }
 
@@ -46,7 +36,6 @@ const getHotSales = () => {
 
 export {
   getCouponsQuery,
-  findCouponsQuery,
   getCouponQuery,
   getHotSales
 }

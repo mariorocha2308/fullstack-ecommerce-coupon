@@ -3,6 +3,7 @@ import { Box, Image, Text } from '@chakra-ui/react'
 import image from '../assets/12.12 Sale-cuate.svg'
 
 const Landing = () => {
+
   return (  
     <Box display='flex' py='10' justifyContent='space-evenly' alignItems='center'>
       <Box display='column' >
