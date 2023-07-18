@@ -21,7 +21,7 @@ const Navbar = () => {
             <Box>
               {!isAuth 
               ? <Box display='flex' gap='1rem'>
-                <Button colorScheme='purple' size='sm' variant='ghost' 
+                <Button size='sm' variant='ghost' 
                   onClick={() => navigation('/auth/login')}>Login</Button>
                 <Button colorScheme='purple' size='sm' variant='solid' 
                   onClick={() => navigation('/auth/register')}>Register</Button>

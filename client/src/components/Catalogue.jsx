@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSignal } from "@preact/signals-react";
 import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { getCouponsQuery } from '../utils/apiQueries/coupon';
@@ -8,30 +8,27 @@ import Coupon from './Coupon';
 
 const Catalogue = () => {
 
-  const [input, setInput] = useState({
-    type: '',
+  const type = useSignal('');
+  // const [input, setInput] = useState({
+  //   type: '',
     // discount: { min: 5, max: 75 },
     // price: { min: 5, max: 25 }
-  })
+  // })
 
   const { currentPage, pageSize, setDataLength, setCurrentPage } = usePaginationStore()
-  const { data: coupons, refetch } = useQuery(['coupons', input.type || 'all', currentPage, ], () => getCouponsQuery({input, currentPage, pageSize}), {
+  const { data: coupons } = useQuery(['coupons', type.value || 'all', currentPage, ], () => getCouponsQuery({type: type.value, currentPage, pageSize}), {
     onSuccess: (data) => {
       setDataLength(data?.count)
     },
     staleTime: Infinity
   })
 
-  useEffect(() => {
-    refetch()
-  }, [refetch, input.type, /*input.price.min, input.price.max, input.discount.min, input.discount.max */]);
-
   const handleCategory = (item) => {
     setCurrentPage(1)
-    if(input.type === item) {
-      return setInput({...input, type: ''})
+    if(type.value === item) {
+      return type.value = ''
     }
-    setInput({...input, type: item})
+    type.value = item
   }
 
   // const handleRange = (e) => {

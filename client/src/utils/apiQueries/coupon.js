@@ -6,7 +6,7 @@ const getCouponsQuery = (params) => {
 
   return new Promise((resolve, reject) => {
     fetch(`${API_HOST}/coupon/all?page=${params.currentPage}&pagesize=${params.pageSize}`.concat(
-      params.input.type !== '' ? `&type=${params.input.type}` : '',
+      params.type !== '' ? `&type=${params.type}` : '',
       // params.input.discount ? `&discount=${convertDiscount}` : '',
       // params.input.price ? `&price=${convertPrice}` : ''
     ))
