@@ -1,5 +1,5 @@
-import { Box, IconButton, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/react';
-import { RiStackFill } from 'react-icons/ri'
+import { Box, Divider, IconButton, Input, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, Text } from '@chakra-ui/react';
+import { RiEqualizerFill, RiStackFill } from 'react-icons/ri'
 import { categories } from '../utils/constants/categories';
 
 const FilterAndSort = props => {
@@ -22,26 +22,26 @@ const FilterAndSort = props => {
         </MenuList>
       </Menu>
 
-      {/* <Menu>
+      <Menu>
         <MenuButton as={IconButton}
           variant='outline'
           aria-label='Sort Coupons'
           icon={<RiEqualizerFill/>}/>
         <MenuList p='4' width='230px' fontWeight='semibold' zIndex={2} gap='5'>
-          <Text fontSize='sm'>Price 5-25</Text>
+          <Text fontSize='sm'>Price 5 - 25</Text>
           <Box display='flex' py='2' alignItems='center'>
-            <Input type='number' placeholder='min' max={5} name='min' id='price' onChange={(e) => props.onHandleRange(e)}/>
+            <Input type='number' placeholder='min' name='min' id='price' onChange={(e) => props.onHandleRange(e)}/>
             <Divider width='100px' marginX='2'/>
-            <Input type='number' placeholder='max' max={25} name='max' id='price' onChange={(e) => props.onHandleRange(e)}/>
+            <Input type='number' placeholder='max' name='max' id='price' onChange={(e) => props.onHandleRange(e)}/>
           </Box>
-          <Text fontSize='sm'>Discount 5-75</Text>
+          <Text fontSize='sm' mt='1rem'>Discount 5 - 75</Text>
           <Box display='flex' py='2' alignItems='center'>
             <Input type='number' placeholder='min' name='min' id='discount' onChange={(e) => props.onHandleRange(e)}/>
             <Divider width='100px' marginX='2'/>
             <Input type='number' placeholder='max' name='max' id='discount' onChange={(e) => props.onHandleRange(e)}/>
           </Box>
         </MenuList>
-      </Menu> */}
+      </Menu>
     </Box>
   );
 }

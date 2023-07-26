@@ -11,7 +11,7 @@ const Coupon = props => {
       <Circle size='11rem' bg={couponColorizer(props.discount)} color='white' position='absolute' top='-7' right='-8'>
       </Circle>
 
-      <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800' zIndex={1}>
+      <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800'>
         <Icon as={RiHeart2Fill} cursor='pointer' fontSize='24px'/>
         <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px'/>
       </Stack>

@@ -1,4 +1,4 @@
-import React, { useEffect, lazy } from 'react'
+import React, { lazy, useEffect } from 'react'
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom'
 import { useAuthStore } from './zustand/stores/authCreator'
@@ -25,29 +25,30 @@ function App() {
     if (isStorage) setAuth(true)
   }, [])
 
+
   return (
     <Box color={color} bg='#F8F9F9'>
       <Routes>
-        <Route parth='/' element={
+        <Route path='/' element={
           <>
             <Navbar/>
             <Footer/>
           </>
         }>
           <Route index element={<Home/>}/>
-        </Route>
 
-        <Route path='/auth/login' element={
-          <PrivateRoute>
-            <Login/>
-          </PrivateRoute>
-        }/>
-        
-        <Route path='/auth/register' element={
-          <PrivateRoute>
-            <Register/>
-          </PrivateRoute>
-        }/>
+          <Route path='/auth/login' element={
+            <PrivateRoute>
+              <Login/>
+            </PrivateRoute>
+          }/>
+          
+          <Route path='/auth/register' element={
+            <PrivateRoute>
+              <Register/>
+            </PrivateRoute>
+          }/>
+        </Route>
       </Routes>
     </Box>
   )

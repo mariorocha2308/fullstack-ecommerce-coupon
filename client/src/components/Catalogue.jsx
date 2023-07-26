@@ -1,4 +1,4 @@
-import { useSignal } from "@preact/signals-react";
+import { useEffect, useRef, useState } from 'react';
 import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { getCouponsQuery } from '../utils/apiQueries/coupon';
@@ -8,15 +8,18 @@ import Coupon from './Coupon';
 
 const Catalogue = () => {
 
-  const type = useSignal('');
-  // const [input, setInput] = useState({
-  //   type: '',
-    // discount: { min: 5, max: 75 },
-    // price: { min: 5, max: 25 }
-  // })
+  const categoryRef = useRef('');
+  const [input, setInput] = useState({
+    price: { min: 5, max: 25 },
+    discount: { min: 5, max: 75 }
+  })
 
   const { currentPage, pageSize, setDataLength, setCurrentPage } = usePaginationStore()
-  const { data: coupons } = useQuery(['coupons', type.value || 'all', currentPage, ], () => getCouponsQuery({type: type.value, currentPage, pageSize}), {
+  const { data: coupons, refetch } = useQuery(['coupons', categoryRef.current || 'all', currentPage, ], () => getCouponsQuery({
+      type: categoryRef.current,
+      price: input.price,
+      discount: input.discount,
+      currentPage, pageSize}), {
     onSuccess: (data) => {
       setDataLength(data?.count)
     },
@@ -25,21 +28,23 @@ const Catalogue = () => {
 
   const handleCategory = (item) => {
     setCurrentPage(1)
-    if(type.value === item) {
-      return type.value = ''
-    }
-    type.value = item
+    categoryRef.current = item
   }
 
-  // const handleRange = (e) => {
-  //   setInput({...input, [e.target.id]: { ...input[e.target.id], [ e.target.name ]: Number(e.target.value) }})
-  // }
+  const handleRange = (e) => {
+    console.log(e.target.value);
+    setInput({...input, [e.target.id]: { ...input[e.target.id], [ e.target.name ]: Number(e.target.value) }})
+  }
+
+  useEffect(() => {
+    refetch()
+  }, [refetch, input.price.min, input.price.max, input.discount.min, input.discount.max]);
 
   return ( 
     <Box my='2rem'>
       <Box display='flex'  justifyContent='space-between' mb='2rem'>
-        <Text fontFamily='Poppins-Bold' fontSize='25px' >Catalogue</Text>
-        <SortCoupons /*onHandleRange={handleRange}*/ onHandleCategory={handleCategory}/>
+        <Text fontFamily='Poppins-Bold' fontSize='25px'>Catalogue</Text>
+        <SortCoupons onHandleRange={handleRange} onHandleCategory={handleCategory}/>
       </Box>
       <Grid gap='8' 
         templateColumns={['repeat(1, 100%)','repeat(1, 70%)', 'repeat(2, 45%)', 'repeat(3, 230px)','repeat(4, 230px)']} 

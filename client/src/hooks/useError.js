@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+// import { useState } from 'react';
 
-const useError = () => {
+// const useError = () => {
 
-  const [error, setError] = useState('')
+//   const [error, setError] = useState('')
 
-  const handlingError = (err) => {
-    setError(err)
-    setTimeout(() => setError(''), 4000)
-  }
+//   const handlingError = (err) => {
+//     setError(err)
+//     setTimeout(() => setError(''), 4000)
+//   }
 
-  return [error, handlingError];
-}
+//   return [error, handlingError];
+// }
 
-export default useError;
+// export default useError;
