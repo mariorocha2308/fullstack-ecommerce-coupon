@@ -8,17 +8,17 @@ import Coupon from './Coupon';
 
 const Catalogue = () => {
 
-  const categoryRef = useRef('');
-  const [input, setInput] = useState({
+  const category = useRef('');
+  const [sort, setSort] = useState({
     price: { min: 5, max: 25 },
     discount: { min: 5, max: 75 }
   })
 
   const { currentPage, pageSize, setDataLength, setCurrentPage } = usePaginationStore()
-  const { data: coupons, refetch } = useQuery(['coupons', categoryRef.current || 'all', currentPage, ], () => getCouponsQuery({
-      type: categoryRef.current,
-      price: input.price,
-      discount: input.discount,
+  const { data: coupons, refetch } = useQuery(['coupons', category.current || 'all', currentPage, ], () => getCouponsQuery({
+      type: category.current,
+      price: sort.price,
+      discount: sort.discount,
       currentPage, pageSize}), {
     onSuccess: (data) => {
       setDataLength(data?.count)
@@ -28,17 +28,18 @@ const Catalogue = () => {
 
   const handleCategory = (item) => {
     setCurrentPage(1)
-    categoryRef.current = item
+    category.current = item
   }
 
   const handleRange = (e) => {
-    console.log(e.target.value);
-    setInput({...input, [e.target.id]: { ...input[e.target.id], [ e.target.name ]: Number(e.target.value) }})
+    setSort({...sort, [e.target.id]: { ...sort[e.target.id], [ e.target.name ]: Number(e.target.value) }})
   }
 
   useEffect(() => {
     refetch()
-  }, [refetch, input.price.min, input.price.max, input.discount.min, input.discount.max]);
+  }, [refetch, sort.price.min, sort.price.max, sort.discount.min, sort.discount.max]);
+
+  console.log(sort.price.min);
 
   return ( 
     <Box my='2rem'>
