@@ -1,4 +1,4 @@
-import { Box, Divider, IconButton, Input, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, IconButton, Input, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, Text } from '@chakra-ui/react';
 import { RiEqualizerFill, RiStackFill } from 'react-icons/ri'
 import { categories } from '../utils/constants/categories';
 
@@ -30,18 +30,20 @@ const FilterAndSort = props => {
         <MenuList p='4' width='230px' fontWeight='semibold' zIndex={2} gap='5'>
           <Text fontSize='sm'>Price 5 - 25</Text>
           <Box display='flex' py='2' alignItems='center'>
-            <Input type='number' placeholder='min' name='min' id='price' onChange={(e) => props.onHandleRange(e)}/>
+            <Input type='number' placeholder='min' name='min' id='price' onChange={props.onHandleRange}/>
             <Divider width='100px' marginX='2'/>
-            <Input type='number' placeholder='max' name='max' id='price' onChange={(e) => props.onHandleRange(e)}/>
+            <Input type='number' placeholder='max' name='max' id='price' onChange={props.onHandleRange}/>
           </Box>
           <Text fontSize='sm' mt='1rem'>Discount 5 - 75</Text>
           <Box display='flex' py='2' alignItems='center'>
-            <Input type='number' placeholder='min' name='min' id='discount' onChange={(e) => props.onHandleRange(e)}/>
+            <Input type='number' placeholder='min' name='min' id='discount' onChange={props.onHandleRange}/>
             <Divider width='100px' marginX='2'/>
-            <Input type='number' placeholder='max' name='max' id='discount' onChange={(e) => props.onHandleRange(e)}/>
+            <Input type='number' placeholder='max' name='max' id='discount' onChange={props.onHandleRange}/>
           </Box>
+          <Button variant='outline' colorScheme='purple' size='sm' onClick={props.onRefetch} mt='1rem' w='100%'>Aplicar</Button>
         </MenuList>
       </Menu>
+
     </Box>
   );
 }
