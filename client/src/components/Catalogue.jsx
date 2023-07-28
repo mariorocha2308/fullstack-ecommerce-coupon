@@ -73,7 +73,7 @@ const Catalogue = () => {
   return ( 
     <Box my='2rem'>
       <Box display='flex'  justifyContent='space-between' mb='2rem'>
-        <Text fontFamily='Poppins-Bold' fontSize='25px'>Catalogue</Text>
+        <Text fontFamily='Poppins-Bold' fontSize='20px'>Catalogue</Text>
         <SortCoupons onHandleRange={(e) => handleRange(e)} onHandleCategory={handleCategory} onRefetch={() => refetch()}/>
       </Box>
       {isFetching ? <Loader h='912px'/> : <RenderCoupons/>}

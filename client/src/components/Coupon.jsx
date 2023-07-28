@@ -16,7 +16,7 @@ const Coupon = props => {
         <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px'/>
       </Stack>
 
-      <Text fontSize='20px' fontFamily='Poppins-Bold'>{props.type}</Text>
+      <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>
       <Box display='flex' w='100%' h='5vh' alignItems='center' borderColor='blackAlpha.900' border='2px' borderRadius='5px' mt='0.5rem'>
         <Box display='flex' alignItems='center' justifyContent='center' w='50%' bgColor='blackAlpha.900' h='100%' color='white'>
           <Text fontSize='16px' fontFamily='Poppins-Bold'>${props.price}</Text>
