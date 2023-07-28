@@ -12,15 +12,15 @@ const Footer = () => {
 
         <Box display='flex' justifyContent='space-between'>
           <Box w='300px' textAlign='start'>
-            <Text fontFamily='Poppins-Bold' mb='1rem'>Support</Text>
+            <Text fontFamily='Poppins-Medium' mb='1rem'>Support</Text>
           </Box>
 
           <Box w='300px' textAlign='center'>
-            <Text fontFamily='Poppins-Bold' mb='1rem'>FAQS</Text>
+            <Text fontFamily='Poppins-Medium' mb='1rem'>FAQS</Text>
           </Box>
 
           <Box w='300px' textAlign='end'>
-            <Text fontFamily='Poppins-Bold' mb='1rem'>Account</Text>
+            <Text fontFamily='Poppins-Medium' mb='1rem'>Account</Text>
           </Box>
         </Box>
 
