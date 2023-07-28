@@ -10,7 +10,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 
 //* COMPONENTS
-const PrivateRoute = lazy(() => import('./components/PrivateRoute'))
+const PrivateRoute = lazy(() => import('./components/fragments/PrivateRoute'))
 const Navbar = lazy(() => import('./components/Navbar'))
 const Footer = lazy(() => import('./components/Footer'))
 
@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     if (isStorage) setAuth(true)
-  }, [])
+  }, [isStorage, setAuth])
 
 
   return (

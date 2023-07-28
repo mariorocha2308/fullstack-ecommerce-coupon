@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
 
-const LazyGlobal = () => {
+const LazyGlobal = props => {
 
   return (
-    <Box display='grid' placeItems='center' height='100vh'>
+    <Box display='grid' placeItems='center' height={props.h}>
       <div className="lds-facebook"><div></div><div></div><div></div></div>
     </Box> 
   );

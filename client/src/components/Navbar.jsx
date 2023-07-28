@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom'
 import { Box, Button, Text } from '@chakra-ui/react'
 import { useAuthStore } from '../zustand/stores/authCreator';
-import Loader from './Loader';
+import Loader from './fragments/Loader';
 
 const AvatarMenu = lazy(() => import('./AvatarMenu'))
 
@@ -30,7 +30,7 @@ const Navbar = () => {
             </Box>
         </Box>
       </Box>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader h='100vh'/>}>
         <Box maxWidth='1200px' margin='auto' pt='10vh'>
           <Outlet/>
         </Box> 
