@@ -2,7 +2,9 @@ import { useRef } from 'react';
 import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { getCouponsQuery } from '../utils/apiQueries/coupon';
-import { usePaginationStore } from '../zustand/stores/paginationCreator';
+import { usePaginationStore } from '../zustand/stores/usePaginationCreator';
+import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
+import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
 import SortCoupons from './SortCoupons'
 import NotFound from './fragments/NotFound';
 import Loader from './fragments/Loader';
@@ -15,8 +17,11 @@ const Catalogue = () => {
     price: { min: 5, max: 25 },
     discount: { min: 5, max: 75 }
   })
-
+  
+  const { addFavorites } = useFavoritesPersist()
+  const { addWhitelist } = useWhitelistPersist()
   const { currentPage, pageSize, setDataLength, setCurrentPage } = usePaginationStore()
+
   const { data: coupons, refetch, isFetching, error, isError } = useQuery(['coupons', category.current || 'all', currentPage, ], () => getCouponsQuery({
       type: category.current,
       price: sort.current.price,
@@ -63,7 +68,10 @@ const Catalogue = () => {
               promoCode={coupon.promoCode} 
               titleDiscount='UP TO'
               discount={coupon.discount} 
-              price={coupon.price}/>
+              price={coupon.price}
+              onFavorite={addFavorites}
+              onWhitelist={addWhitelist}
+              />
           </GridItem>
         ))}
       </Grid>

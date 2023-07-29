@@ -14,7 +14,7 @@ const Landing = () => {
         </Text>
         <Text width='400px' fontFamily='Poppins-Medium' fontSize='18px'>This and more benefits for our users.</Text>
       </Box>
-      <Image src={image} height='300px' alt='halloween coupons'/>
+      <Image src={image} height='300px' w='300px' alt='shopping day 12.12, best sale' />
     </Box>
   );
 }

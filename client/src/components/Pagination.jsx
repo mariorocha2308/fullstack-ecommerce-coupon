@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, ButtonGroup, IconButton } from '@chakra-ui/react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { usePaginationStore } from '../zustand/stores/paginationCreator';
+import { usePaginationStore } from '../zustand/stores/usePaginationCreator';
 
 const Pagination = () => {
 

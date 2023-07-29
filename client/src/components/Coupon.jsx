@@ -12,8 +12,8 @@ const Coupon = props => {
       </Circle>
 
       <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800'>
-        <Icon as={RiHeart2Fill} cursor='pointer' fontSize='24px'/>
-        <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px'/>
+        <Icon as={RiHeart2Fill} cursor='pointer' fontSize='24px' onClick={() => props.onFavorite(props.id)}/>
+        <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px' onClick={() => props.onWhitelist(props.id)}/>
       </Stack>
 
       <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-const usePaginationStore = create((set, get) => ({
+const usePaginationStore = create((set) => ({
   pageSize: 12,
   dataLength: 0,
   currentPage: 1,

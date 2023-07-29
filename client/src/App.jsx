@@ -1,7 +1,7 @@
 import React, { lazy, useEffect } from 'react'
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom'
-import { useAuthStore } from './zustand/stores/authCreator'
+import { useAuthStore } from './zustand/stores/useAuthCreator'
 import { getItem } from 'react-safe-storage'
 
 //* PAGES

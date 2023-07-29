@@ -1,5 +1,5 @@
 import { getItem } from 'react-safe-storage';
-import { useAuthStore } from '../zustand/stores/authCreator';
+import { useAuthStore } from '../zustand/stores/useAuthCreator';
 import { Avatar, Badge, Box, Menu, MenuButton, MenuItem, MenuList, Stack, Text, AvatarBadge } from '@chakra-ui/react';
 import { MdOutlineLogout } from 'react-icons/md'
 
