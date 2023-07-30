@@ -1,6 +1,7 @@
 const { generateRandomTypes, generateRandomInteger } = require('./generator')
 const Coupon = require('../models/coupon')
 const ShortUniqueId = require('short-unique-id');
+const LoremIpsum = require("lorem-ipsum").loremIpsum;
 
 const initLocalData = async () => {
 
@@ -17,7 +18,10 @@ const initLocalData = async () => {
         type: generateRandomTypes(),
         promoCode: uid(),
         price: generateRandomInteger(5, 20),
-        discount: generateRandomInteger(5, 75)
+        discount: generateRandomInteger(5, 75),
+        description: LoremIpsum({
+          units: 'paragraphs'
+        })
       })
     }
   }

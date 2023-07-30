@@ -32,7 +32,8 @@ const getCoupon = (req, res) => {
 
   try {
     Coupon.findOne({where: { id },
-      attributes: ['id', 'title', 'type', 'price', 'discount'],
+      include: Review,
+      attributes: ['id', 'title', 'type', 'price', 'discount', 'description'],
     })
     .then(result => res.json(result))
     .catch(() => res.send({ error: "" }))

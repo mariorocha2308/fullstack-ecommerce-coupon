@@ -23,6 +23,10 @@ const Coupon = sequelize.define('coupon', {
   discount: {
     type: DataTypes.SMALLINT,
     allowNull: false
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false
   }
 }, {
   timestamps: false
