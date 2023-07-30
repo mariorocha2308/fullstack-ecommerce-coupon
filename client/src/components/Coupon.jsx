@@ -11,6 +11,10 @@ const Coupon = props => {
   const { favorites } = useFavoritesPersist()
   const { whitelist } = useWhitelistPersist()
 
+  const smoothWindowTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <Box display='flex' flexDirection='column' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' 
       overflow='hidden' boxSizing='border-box' p='4' minW='230px' bg='white' justifyContent='flex-end'>
@@ -26,7 +30,7 @@ const Coupon = props => {
         />
       </Stack>
 
-      <Link to={`/coupons/detail/${props.id}`}>
+      <Link to={`/coupons/detail/${props.id}`} onClick={smoothWindowTop}>
         <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>
         <Box display='flex' w='100%' h='5vh' alignItems='center' borderColor='blackAlpha.900' border='2px' borderRadius='5px' mt='0.5rem'>
           <Box display='flex' alignItems='center' justifyContent='center' w='50%' bgColor='blackAlpha.900' h='100%' color='white'>
