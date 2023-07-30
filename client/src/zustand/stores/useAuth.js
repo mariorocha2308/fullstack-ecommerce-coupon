@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { setItem } from 'react-safe-storage'
 
-const useAuthStore = create((set) => ({
+const useAuth = create((set) => ({
   isAuth: false,
   setAuth: (bool) => set({ isAuth: bool }),
   login: (objUser) => {     
@@ -15,4 +15,4 @@ const useAuthStore = create((set) => ({
 }))
 
 
-export { useAuthStore }
+export { useAuth }

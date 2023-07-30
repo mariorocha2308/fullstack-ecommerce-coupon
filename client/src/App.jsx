@@ -1,7 +1,7 @@
 import React, { lazy, useEffect } from 'react'
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom'
-import { useAuthStore } from './zustand/stores/useAuthCreator'
+import { useAuth } from './zustand/stores/useAuth'
 import { getItem } from 'react-safe-storage'
 
 //* PAGES
@@ -17,7 +17,7 @@ const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
 
-  const { setAuth } = useAuthStore()
+  const { setAuth } = useAuth()
   const isStorage = getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user')
 
   const color = useColorModeValue('blackAlpha.800', 'whiteAlpha')

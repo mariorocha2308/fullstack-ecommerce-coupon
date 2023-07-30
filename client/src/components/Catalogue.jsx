@@ -65,8 +65,7 @@ const Catalogue = () => {
               id={coupon.id}
               title={coupon.title} 
               type={coupon.type} 
-              promoCode={coupon.promoCode} 
-              titleDiscount='UP TO'
+              promoCode={coupon.promoCode}
               discount={coupon.discount} 
               price={coupon.price}
               onFavorite={addFavorites}
