@@ -8,6 +8,7 @@ import { getItem } from 'react-safe-storage'
 const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
+const Detail = lazy(() => import('./pages/Detail'))
 
 //* COMPONENTS
 const PrivateRoute = lazy(() => import('./components/fragments/PrivateRoute'))
@@ -28,28 +29,35 @@ function App() {
 
   return (
     <Box color={color} bg='#F8F9F9'>
-      <Routes>
-        <Route path='/' element={
-          <>
-            <Navbar/>
-            <Footer/>
-          </>
-        }>
-          <Route index element={<Home/>}/>
+      {/* <HashRouter> */}
 
-          <Route path='/auth/login' element={
-            <PrivateRoute>
-              <Login/>
-            </PrivateRoute>
-          }/>
-          
-          <Route path='/auth/register' element={
-            <PrivateRoute>
-              <Register/>
-            </PrivateRoute>
-          }/>
-        </Route>
-      </Routes>
+        <Routes>
+          <Route path='/' element={
+            <>
+              <Navbar/>
+              <Footer/>
+            </>
+          }>
+            <Route index element={<Home/>}/>
+
+            <Route path='/auth/login' element={
+              <PrivateRoute>
+                <Login/>
+              </PrivateRoute>
+            }/>
+            
+            <Route path='/auth/register' element={
+              <PrivateRoute>
+                <Register/>
+              </PrivateRoute>
+            }/>
+
+            <Route path='/coupons/detail/:id' element={
+              <Detail/>
+            }/>
+          </Route>
+        </Routes>
+      {/* </HashRouter> */}
     </Box>
   )
 }

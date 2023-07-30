@@ -4,6 +4,7 @@ import { Box, Text, Circle, Stack, Icon } from '@chakra-ui/react';
 import { couponColorizer } from '../utils/functions/couponColorizer'
 import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
 import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
+import { Link } from 'react-router-dom';
 
 const Coupon = props => {
 
@@ -25,15 +26,17 @@ const Coupon = props => {
         />
       </Stack>
 
-      <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>
-      <Box display='flex' w='100%' h='5vh' alignItems='center' borderColor='blackAlpha.900' border='2px' borderRadius='5px' mt='0.5rem'>
-        <Box display='flex' alignItems='center' justifyContent='center' w='50%' bgColor='blackAlpha.900' h='100%' color='white'>
-          <Text fontSize='16px' fontFamily='Poppins-Bold'>${props.price}</Text>
+      <Link to={`/coupons/detail/${props.id}`}>
+        <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>
+        <Box display='flex' w='100%' h='5vh' alignItems='center' borderColor='blackAlpha.900' border='2px' borderRadius='5px' mt='0.5rem'>
+          <Box display='flex' alignItems='center' justifyContent='center' w='50%' bgColor='blackAlpha.900' h='100%' color='white'>
+            <Text fontSize='16px' fontFamily='Poppins-Bold'>${props.price}</Text>
+          </Box>
+          <Box display='flex' alignItems='center' justifyContent='center' w='50%' textAlign='center' h='100%'>
+            <Text fontSize='16px' fontFamily='Poppins-Bold'>{props.discount}%</Text>
+          </Box>
         </Box>
-        <Box display='flex' alignItems='center' justifyContent='center' w='50%' textAlign='center' h='100%'>
-          <Text fontSize='16px' fontFamily='Poppins-Bold'>{props.discount}%</Text>
-        </Box>
-      </Box>
+      </Link>
     </Box>
   );
 }

@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom'
 import { Box, Button, IconButton, Text } from '@chakra-ui/react'
 import { useAuthStore } from '../zustand/stores/useAuthCreator';
-import { RiShoppingBag3Fill, RiHeart2Fill } from 'react-icons/ri'
+import { RiShoppingBag3Fill, RiHeart2Fill, RiNotification4Fill, RiFireFill } from 'react-icons/ri'
 import Loader from './fragments/Loader';
 
 const AvatarMenu = lazy(() => import('./AvatarMenu'))
@@ -22,8 +22,10 @@ const Navbar = () => {
 
           <Box display='flex' gap='3rem' alignItems='center'>
             <Box display='flex' gap='0.8rem'>
+              <IconButton icon={<RiNotification4Fill size='20px'/>}  borderRadius='full' size='md'/>
               <IconButton icon={<RiHeart2Fill size='20px'/>} borderRadius='full' size='md'/>
               <IconButton icon={<RiShoppingBag3Fill size='20px'/>}  borderRadius='full' size='md'/>
+              <IconButton icon={<RiFireFill size='20px'/>}  borderRadius='full' size='md'/>
             </Box>
             <Box>
               {!isAuth 
