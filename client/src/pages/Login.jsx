@@ -3,7 +3,7 @@ import { MdEmail, MdLock } from 'react-icons/md'
 import { useForm } from 'react-hook-form'
 import { postLoginUser } from '../utils/apiQueries/auth'
 import { useNavigate } from 'react-router-dom'
-import { useAuthStore } from '../zustand/stores/authCreator'
+import { useAuthStore } from '../zustand/stores/useAuthCreator'
 
 const Login = () => {
 

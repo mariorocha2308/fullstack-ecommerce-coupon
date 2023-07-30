@@ -2,8 +2,13 @@ import React from 'react';
 import { RiShoppingBag3Fill, RiHeart2Fill } from 'react-icons/ri'
 import { Box, Text, Circle, Stack, Icon } from '@chakra-ui/react';
 import { couponColorizer } from '../utils/functions/couponColorizer'
+import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
+import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
 
 const Coupon = props => {
+
+  const { favorites } = useFavoritesPersist()
+  const { whitelist } = useWhitelistPersist()
 
   return (
     <Box display='flex' flexDirection='column' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' 
@@ -12,8 +17,12 @@ const Coupon = props => {
       </Circle>
 
       <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800'>
-        <Icon as={RiHeart2Fill} cursor='pointer' fontSize='24px' onClick={() => props.onFavorite(props.id)}/>
-        <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px' onClick={() => props.onWhitelist(props.id)}/>
+        <Icon as={RiHeart2Fill} cursor='pointer' fontSize='24px' onClick={() => props.onFavorite(props.id)}
+          color={favorites.some(favorite => favorite === props.id) ? 'blackAlpha.800' : 'whiteAlpha.800'}
+        />
+        <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px' onClick={() => props.onWhitelist(props.id)}
+          color={whitelist.some(whitelist => whitelist === props.id) ? 'blackAlpha.800' : 'whiteAlpha.800'}
+        />
       </Stack>
 
       <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>
