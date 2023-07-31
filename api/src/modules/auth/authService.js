@@ -23,10 +23,10 @@ const authRegister = async (req, res) => {
     if (!existUser) {
       User.create({ name, email, password: encryptPassword, role: 'user'})
       .then(() => res.send({ message: 'Successfully registered' }))
-      .catch(() => res.send({ error: 'User cant be created' }))
+      .catch(() => res.send({ error: 'User cannot be created' }))
     }
   } catch (error) {
-    return res.send({ error: 'Failed' })
+    return res.send({ error: 'Error in server' })
   }
 }
 

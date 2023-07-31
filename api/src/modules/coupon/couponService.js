@@ -10,7 +10,7 @@ const getCoupons = (req, res) => {
   const [startPrice, endPrice] = price ? price.split(',') : ''
 
   try {
-    Coupon.findAndCountAll({ include: Review, offset: offsetSize, limit: pagesize, 
+    Coupon.findAndCountAll({ offset: offsetSize, limit: pagesize, 
       where: {
         [Op.and]: [ 
           type ? {type: {[Op.iLike]: `%${type}%`}} : '',
@@ -21,9 +21,9 @@ const getCoupons = (req, res) => {
       attributes: ['id', 'title', 'type', 'price', 'discount'],
     })
     .then(result => res.json(result))
-    .catch(() => res.send({ error: "" }))
+    .catch(() => res.send({ error: "Get coupons is failed" }))
   } catch (error) {
-    return res.send({ error: "" })
+    return res.send({ error: "Error in server" })
   }
 }
 
@@ -36,9 +36,9 @@ const getCoupon = (req, res) => {
       attributes: ['id', 'title', 'type', 'price', 'discount', 'description'],
     })
     .then(result => res.json(result))
-    .catch(() => res.send({ error: "" }))
+    .catch(() => res.send({ error: "Get coupon is failed" }))
   } catch (error) {
-    return res.send({ error: "" })
+    return res.send({ error: "Error in server" })
   }
 }
 
@@ -47,13 +47,13 @@ const getHotSales = (_, res) => {
     Coupon.findAll({where: {
       discount: {[Op.gt]: 50},
       price: {[Op.lt]: 10},
-    }, include: Review,
+    },
     attributes: ['id', 'title', 'type', 'price', 'discount'],
     })
     .then(result => res.json(result))
-    .catch(() => res.send({ error: "" }))
+    .catch(() => res.send({ error: "Get hotsales is failed" }))
   } catch (error) {
-    return res.send({ error: "" })
+    return res.send({ error: "Error in server" })
   }
 }
 

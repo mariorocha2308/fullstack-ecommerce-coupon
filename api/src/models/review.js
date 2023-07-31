@@ -3,14 +3,14 @@ const sequelize = require('./index')
 
 const Review = sequelize.define('review', {
   // Model attributes are defined here
-  image: {
+  userImage: {
     type: DataTypes.TEXT
   },
   creator: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  description: {
+  content: {
     type: DataTypes.TEXT,
     allowNull: false
   }
