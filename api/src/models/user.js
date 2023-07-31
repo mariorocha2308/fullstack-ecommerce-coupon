@@ -4,7 +4,8 @@ const sequelize = require('./index')
 const User = sequelize.define('user', {
   // Model attributes are defined here
   image: {
-    type: DataTypes.TEXT
+    type: DataTypes.TEXT,
+    allowNull: true
   },
   name: {
     type: DataTypes.STRING,
@@ -20,7 +21,7 @@ const User = sequelize.define('user', {
   },
   phoneNumber: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   role: {
     type: DataTypes.STRING,

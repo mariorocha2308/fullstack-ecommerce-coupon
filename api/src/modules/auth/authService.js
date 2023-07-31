@@ -4,12 +4,12 @@ const { compare, encrypt } = require('../../helpers/encrypt')
 const { generateAccessToken } = require('../../helpers/jwt')
 
 const authRegister = async (req, res) => {
-  const {image, name, email, password, phoneNumber } = req.body
+  const { name, email, password } = req.body
   const encryptPassword = await encrypt(password)
 
   try {
     const existUser = await User.findOne({raw : true, nest: true, where: {
-      [Op.or]: [{name}, {email}, {phoneNumber}]
+      [Op.or]: [{name}, {email}]
     }})
 
     if (existUser) {
@@ -21,7 +21,7 @@ const authRegister = async (req, res) => {
     }
 
     if (!existUser) {
-      User.create({ image, name, email, password: encryptPassword, phoneNumber, role: 'user'})
+      User.create({ name, email, password: encryptPassword, role: 'user'})
       .then(() => res.send({ message: 'Successfully registered' }))
       .catch(() => res.send({ error: 'User cant be created' }))
     }
@@ -31,10 +31,10 @@ const authRegister = async (req, res) => {
 }
 
 const authLogin = async (req, res) => {
-  const { userTag, password } = req.body
+  const { email, password } = req.body
 
   try {
-    const isAccount = await User.findOne({raw : true, nest: true, where: {email: userTag}})
+    const isAccount = await User.findOne({raw : true, nest: true, where: {email}})
 
     if (isAccount) {
       compare(password, isAccount.password)
@@ -45,6 +45,7 @@ const authLogin = async (req, res) => {
 
           const profile = {
             image: isAccount.image,
+            phone: isAccount.phoneNumber,
             userName: isAccount.name,
             email: isAccount.email,
             role: isAccount.role,
