@@ -1,12 +1,29 @@
 import { useState } from "react";
-import { Box, Button, Input, Text } from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertTitle, Box, Button, Input, Text } from "@chakra-ui/react";
+import { useAuth } from "../zustand/stores/useAuth";
 
 const Review = () => {
 
   const [isOpen, setOpen] = useState(false)
+  const { isAuth } = useAuth()
 
   const handleBoxInput = () => {
     setOpen(!isOpen)
+  }
+
+  const RenderInput = () => {
+    if (!isAuth) return (
+      <Alert status='error'>
+        <AlertTitle fontSize='13px'>NOTE!</AlertTitle>
+        <AlertDescription fontSize='13px'>You need to be logged.</AlertDescription>
+      </Alert>
+    )
+
+    return (
+      <Box>
+        <Input placeholder='write your review'/>
+      </Box>
+    )
   }
 
   return (
@@ -16,9 +33,7 @@ const Review = () => {
         <Button size='sm' colorScheme='purple' variant='outline' onClick={handleBoxInput}>{!isOpen ? 'add review' : 'cancel'}</Button>
       </Box>
       {isOpen && (
-        <Box>
-          <Input placeholder='write your review'/>
-        </Box>
+        <RenderInput/>
       )}
     </Box>
   );

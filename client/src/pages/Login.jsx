@@ -1,73 +1,68 @@
-import { Box, Button, Input, Text, FormErrorMessage, Stack, FormControl, InputGroup, InputLeftElement, useToast } from '@chakra-ui/react'
-import { MdEmail, MdLock } from 'react-icons/md'
-import { useForm } from 'react-hook-form'
+import { Box, Button, Input, Text, InputGroup, InputLeftElement, useToast } from '@chakra-ui/react'
 import { postLoginUser } from '../utils/apiQueries/auth'
 import { useNavigate } from 'react-router-dom'
-import { useAuthStore } from '../zustand/stores/useAuthCreator'
+import { useAuth } from '../zustand/stores/useAuth'
+import { useMutation } from 'react-query'
+import { useRef } from 'react'
+import { RiLockFill, RiMailFill } from 'react-icons/ri'
 
 const Login = () => {
 
   const navigate = useNavigate()
   const toast = useToast()
-  const { login } = useAuthStore()
-  const { handleSubmit, register, formState: { errors, isSubmitting }} = useForm()
+  const { login } = useAuth()
 
-  const onSubmit = async (input) => {
-    const authUser = await postLoginUser(input)
-    
-    if (authUser.error) {
-      toast({
-        description: authUser.error,
-        status: 'error',
-        duration: 5000,
-      })
-    } else {
-      login(authUser)
-      navigate('/')
-    }
+  const loginForm = useRef({
+    email: '',
+    password: ''
+  })
+
+  const { mutate } = useMutation(postLoginUser)
+
+  const handleInput = (e) => {
+    loginForm.current[e.target.name] = e.target.value
+  }
+
+  const handleSubmitLogin = () => {
+    mutate(loginForm.current, {
+      onSuccess: (data) => {
+        if (data.error) {
+          return toast({
+            title: data.error,
+            status: 'error',
+            duration: 3000,
+            position: 'bottom-right'
+          })
+        }
+        
+        login(data)
+        navigate('/')
+      }
+    })
   }
 
   return ( 
-    <Box display='flex' flexDirection='column' height='70vh' width='30%' margin='auto' marginTop='4rem'>
+    <Box display='flex' alignItems='center' flexDirection='column' width='30%' margin='auto' height='90vh' justifyContent='center'>
       <Box display='flex' flexDirection='column' alignItems='center'>
-        <Text fontWeight='bold' fontSize='33' marginBottom='2'>Log in</Text>
-        <Text fontWeight='semibold' fontSize='14' marginBottom='3rem' color='gray.500'>Use your account created</Text>
+        <Text fontFamily='Poppins-Bold' fontSize='28px' py='2'>Log in</Text>
+        <Text fontFamily='Poppins-Medium' fontSize='15' marginBottom='3rem' color='blackAlpha.800'>Use your account created</Text>
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing='5' direction='column'>
-          <FormControl isInvalid={errors.userTag}>
-            <InputGroup>
-              <InputLeftElement
-                children={<MdEmail fontSize='23'/>}
-              />
-              <Input placeholder='Enter your email' size='md' variant='outline' fontWeight='medium' fontSize='14'
-              {...register('userTag', {
-                required: 'This is required',
-                pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, message: 'Email invalid'}
-              })}/>
-            </InputGroup>
-            <FormErrorMessage color='red.500' fontWeight='bold' fontSize='12'>
-              {errors.userTag && errors.userTag.message}
-            </FormErrorMessage>
-          </FormControl> 
+      <Box display='flex' flexDirection='column' gap='1rem' w='100%'>
+        <InputGroup>
+            <InputLeftElement pointerEvents='none'>
+              <RiMailFill/>
+            </InputLeftElement>
+            <Input name='email' onChange={handleInput} placeholder='Email' fontSize='15px' fontFamily='Poppins-Medium'/>
+          </InputGroup>
 
-          <FormControl isInvalid={errors.password}>
-            <InputGroup>
-              <InputLeftElement
-                children={<MdLock fontSize='23'/>}
-              />
-              <Input placeholder='Password' size='md' variant='outline' type='password' fontWeight='medium' fontSize='14'
-              {...register('password', {
-                required: 'This is required'
-              })}/>
-            </InputGroup>
-            <FormErrorMessage color='red.500' fontWeight='bold' fontSize='12'>
-              {errors.password && errors.password.message}
-            </FormErrorMessage>
-          </FormControl>
-        </Stack>
-        <Button isLoading={isSubmitting} type='submit' colorScheme='teal' marginTop='10' w='100%'>Log in</Button>
-      </form>
+          <InputGroup>
+            <InputLeftElement pointerEvents='none'>
+              <RiLockFill/>
+            </InputLeftElement>
+            <Input type='password' placeholder='Password' name='password' onChange={handleInput} fontSize='15px' fontFamily='Poppins-Medium'/>
+          </InputGroup>
+      </Box>
+      <Button variant='unstyled' bgColor='blackAlpha.900' _hover={{ boxShadow: 'lg'}} color='white' marginTop='10' w='100%' size='md' onClick={handleSubmitLogin}>Log in</Button>
     </Box>
   );
 }

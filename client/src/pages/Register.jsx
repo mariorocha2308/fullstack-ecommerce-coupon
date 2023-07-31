@@ -1,37 +1,83 @@
-import React, { useState } from 'react';
-import { Box, Input, Stack, Text, Button, Avatar, IconButton } from '@chakra-ui/react';
-import { TbCameraPlus } from 'react-icons/tb'
+import { useRef } from 'react';
+import { Box, Input, Text, Button, InputGroup, InputLeftElement, useToast } from '@chakra-ui/react';
+import { RiLockFill, RiMailFill, RiUser2Fill } from 'react-icons/ri';
+import { useMutation } from 'react-query';
+import { postRegisterUser } from '../utils/apiQueries/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
-  const [input, setInput] = useState({
-    image: '',
+  const toast = useToast()
+  const navigate = useNavigate()
+  const registerForm = useRef({
     name: '',
     email: '',
-    phoneNumber: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   })
 
+  const { mutate } = useMutation(postRegisterUser)
+
   const handleInput = (e) => {
-    setInput({...input, [e.target.name]: e.target.value})
+    registerForm.current[e.target.name] = e.target.value
+  }
+
+  const handleSubmitRegister = () => {
+    if (Object.values(registerForm.current).includes('')) return toast({title: 'Some fields are empty', duration: 3000, status: 'error', position: 'bottom-right'})
+    if (registerForm.current.password !== registerForm.current.confirmPassword) return toast({title: 'Password doesnt match', duration: 3000, status: 'error', position: 'bottom-right'})
+
+    mutate(registerForm.current, {
+      onSuccess: (data) => {
+        if (data.error) {
+          return toast({
+            title: data.error,
+            status: 'error',
+            position: 'bottom-right',
+            duration: 3000
+          })
+        }
+        toast({ title: 'Register Success', duration: 3000, status: 'success', position: 'bottom-right'})
+        navigate('/auth/login')
+      }
+    })
   }
 
   return (  
-    <Box display='flex' alignItems='center' flexDirection='column' width='30%' margin='auto'>
-      <Text fontWeight='bold' fontSize='25px' py='2'>Get started</Text>
-      <Text fontWeight='semibold' fontSize='14' marginBottom='3rem' color='gray.500'>Create your account now</Text>
+    <Box display='flex' alignItems='center' flexDirection='column' width='30%' margin='auto' height='90vh' justifyContent='center'>
+      <Text fontFamily='Poppins-Bold' fontSize='28px' py='2'>Get started</Text>
+      <Text fontFamily='Poppins-Medium' fontSize='15' marginBottom='3rem' color='blackAlpha.800'>Create your account now, it`s free</Text>
 
-      <Box display='flex' alignItems='flex-end' position='relative'>
-        <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='xl'/>
-        <IconButton aria-label='Chose local picture' icon={<TbCameraPlus fontSize='18px'/>} variant='solid' isRound position='absolute' right='-1' 
-        colorScheme='teal' size='sm' type='file'/>
+      <Box display='flex' flexDirection='column' gap='1rem' w='100%'>        
+        <InputGroup>
+          <InputLeftElement pointerEvents='none'>
+            <RiUser2Fill/>
+          </InputLeftElement>
+          <Input name='name' onChange={handleInput} placeholder='Name' fontSize='15px' fontFamily='Poppins-Medium'/>
+        </InputGroup>
+
+        <InputGroup>
+          <InputLeftElement pointerEvents='none'>
+            <RiMailFill/>
+          </InputLeftElement>
+          <Input placeholder='Email' name='email' onChange={handleInput} fontSize='15px' fontFamily='Poppins-Medium'/>
+        </InputGroup>
+
+        <InputGroup>
+          <InputLeftElement pointerEvents='none'>
+            <RiLockFill/>
+          </InputLeftElement>
+          <Input type='password' placeholder='Password' name='password' onChange={handleInput} fontSize='15px' fontFamily='Poppins-Medium'/>
+        </InputGroup>
+
+        <InputGroup>
+          <InputLeftElement pointerEvents='none'>
+            <RiLockFill/>
+          </InputLeftElement>
+          <Input type='password' placeholder='Confirm password' name='confirmPassword' onChange={handleInput} fontSize='15px' fontFamily='Poppins-Medium'/>
+        </InputGroup>
       </Box>
-      <Input placeholder='Name' size='md' variant='outline' name='name' onChange={handleInput}/>
-      <Input placeholder='Email' size='md' variant='outline' name='email' onChange={handleInput}/>
-      <Input placeholder='Phone number' size='md' variant='outline' name='phoneNumber' onChange={handleInput}/>
-      <Input placeholder='Password' size='md' variant='outline' name='password' onChange={handleInput}/>
-      <Input placeholder='Confirm password' size='md' variant='outline' name='confirm-password' onChange={handleInput}/>
-      <Button type='submit' colorScheme='teal' marginTop='10' w='100%'>Register</Button>
+
+      <Button variant='unstyled' bgColor='blackAlpha.900' _hover={{ boxShadow: 'lg'}} color='white' marginTop='10' w='100%' size='md' onClick={handleSubmitRegister}>Register</Button>
     </Box> 
   );
 }

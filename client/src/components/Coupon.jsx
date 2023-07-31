@@ -4,16 +4,13 @@ import { Box, Text, Circle, Stack, Icon } from '@chakra-ui/react';
 import { couponColorizer } from '../utils/functions/couponColorizer'
 import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
 import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
+import { smoothWindowTop } from '../utils/functions/scrollTop';
 import { Link } from 'react-router-dom';
 
 const Coupon = props => {
 
   const { favorites } = useFavoritesPersist()
   const { whitelist } = useWhitelistPersist()
-
-  const smoothWindowTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
 
   return (
     <Box display='flex' flexDirection='column' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' 

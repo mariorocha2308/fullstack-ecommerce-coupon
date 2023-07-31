@@ -32,7 +32,7 @@ const CouponDetail = () => {
           onWhitelist={addWhitelist}
         />
         <Button size='md' w='100%' bgColor='blackAlpha.900' variant='unstyled' color='whiteAlpha.900' fontFamily='Poppins-Bold' mt='3rem'
-          display='flex' alignItems='center'
+          display='flex' alignItems='center' _hover={{ boxShadow: 'lg'}}
           leftIcon={<RiHandCoinFill/>}>
           Buy now
         </Button>

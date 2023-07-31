@@ -4,21 +4,26 @@ import { Box, Button, Text } from '@chakra-ui/react'
 import { useAuth } from '../zustand/stores/useAuth';
 import { RiShoppingBag3Fill, RiHeart2Fill, RiNotification4Fill, RiFireFill } from 'react-icons/ri'
 import Loader from './fragments/Loader';
+import { smoothWindowTop } from '../utils/functions/scrollTop';
 
 const AvatarMenu = lazy(() => import('./AvatarMenu'))
 
 const Navbar = () => {
 
-  const navigation = useNavigate()
+  const navigate = useNavigate()
   const { isAuth } = useAuth()
+
+  const onNavigation = (url) => {
+    smoothWindowTop()
+    navigate(url)
+  }
   
   return (
     <Box>
-      <Box boxShadow='sm' height='9vh' bg='blackAlpha.900' w='100vw' zIndex='2' position='fixed'>
-        <Box display='flex' justifyContent='space-between' alignItems='center' maxWidth='1200px' margin='auto' h='100%' w='1200px' 
-        bgColor='blackAlpha.900' color='white'>
+      <Box boxShadow='sm' height='9vh' bg='white' w='100vw' zIndex='2' position='fixed'>
+        <Box display='flex' justifyContent='space-between' alignItems='center' maxWidth='1200px' margin='auto' h='100%' w='1200px'>
           <Box display='flex' gap='3rem' alignItems='center'>
-            <Text fontFamily='Monserrat' onClick={() => navigation('/')} cursor='pointer'>CPNSTORE</Text>
+            <Text fontFamily='Monserrat' onClick={() => onNavigation('/')} cursor='pointer'>CPNSTORE</Text>
           </Box>
 
           <Box display='flex' gap='3rem' alignItems='center'>
@@ -29,14 +34,16 @@ const Navbar = () => {
               <RiShoppingBag3Fill size='22px'/>
             </Box>
             <Box>
-              {!isAuth 
-              ? <Box display='flex' gap='2rem'>
-                <Button size='sm' variant='unstyled' fontFamily='Poppins-Bold'
-                  onClick={() => navigation('/auth/login')}>Login</Button>
-                <Button colorScheme='purple' size='sm' variant='solid' 
-                  onClick={() => navigation('/auth/register')}>Register</Button>
-              </Box>
-              : <AvatarMenu/>}
+              <Suspense>
+                {!isAuth 
+                ? <Box display='flex' gap='2rem'>
+                  <Button size='sm' variant='unstyled' fontFamily='Poppins-Bold'
+                    onClick={() => onNavigation('/auth/login')}>Login</Button>
+                  <Button colorScheme='purple' size='sm' variant='solid' 
+                    onClick={() => onNavigation('/auth/register')}>Register</Button>
+                </Box>
+                : <AvatarMenu/>}
+              </Suspense>
             </Box>
           </Box>
         </Box>
