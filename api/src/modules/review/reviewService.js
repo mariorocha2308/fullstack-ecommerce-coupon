@@ -4,45 +4,58 @@ const postReview = (req, res) => {
   const { content, userImage, creator, couponRef } = req.body
 
   try {
+
     Review.create({
       content, userImage, creator
     })
     .then(response => response.addCoupon(couponRef))
-    .then(() => res.send({ message: 'Review created successfully'}))
-    .catch(() => res.send({ error: "Get coupon is failed" }))
-  } catch (error) {
+    .then(() => res.send({ message: 'Review was successfully created '}))
+    .catch(() => res.send({ error: "Review cannot be created" }))
+
+  } catch (err) {
     return res.send({ error: "Error in server" })
   }
 }
 
-const putReview = async (req, res) => {
+const putReview = (req, res) => {
   const { content } = req.body
   const { id } = req.params
 
   try {
-    const review = await Review.findOne({where: { id }})
 
-    if (review) {
-      review.update({ content })
-      .then(result => res.json(result))
-      .catch(() => res.send({ error: e }))
-    } else return res.send({ error: "Review not exist" })
-  } catch (error) {
+    Review.findOne({
+      where: { id }
+    })
+    .then(review => { 
+      review.update({ 
+        content 
+      })
+      .then(() => res.send({ message: "Review was successfully updated" }))
+      .catch(() => res.send({ error: "Review cannot be updated" }))
+    })
+    .catch(() => res.send({ error: "Review does not exist"}))
+
+  } catch (err) {
     return res.send({ error: "Error in server" })
   }
 }
 
-const deleteReview = async (req, res) => {
+const deleteReview = (req, res) => {
   const { id } = req.params
 
   try {
-    const review = await Review.findOne({where: { id }})
 
-    if (review) {
+    Review.findOne({
+      where: { id }
+    })
+    .then(review => {
       review.destroy()
-      return res.send({ message: 'Review was deleted'})
-    } else return res.send({ error: 'Review not exist'})
-  } catch (error) {
+      .then(() => res.send({ message: "Review was successfully deleted" }))
+      .catch(() => res.send({ error: "Review cannot be deleted" }))
+    })
+    .catch(() => res.send({ error: "Review does not exist" }))
+
+  } catch (err) {
     return res.send({ error: "Error in server" })
   }
 }

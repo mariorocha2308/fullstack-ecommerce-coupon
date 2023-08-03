@@ -1,32 +1,32 @@
-const { generateRandomTypes, generateRandomInteger } = require('./generator')
-const Coupon = require('../models/coupon')
-const ShortUniqueId = require('short-unique-id');
-const LoremIpsum = require("lorem-ipsum").loremIpsum;
+const Coupon = require("../models/coupon")
+const ShortUniqueId = require("short-unique-id")
+const LoremIpsum = require("lorem-ipsum").loremIpsum
+const { generateRandomTypes, generateRandomInteger } = require("./generator")
 
-const initLocalData = async () => {
+const initLocalData = () => {
 
   const uid = new ShortUniqueId({ 
     length: 10,
-    dictionary: 'alphanum_upper',
-  });
-  const isData = await Coupon.findAll()
+    dictionary: "alphanum_upper",
+  })
 
-  if (isData.length === 0) {
-    for (let i = 0; i < 250; i++) {
-      Coupon.create({
-        title: "Coupon",
-        type: generateRandomTypes(),
-        promoCode: uid(),
-        price: generateRandomInteger(5, 20),
-        discount: generateRandomInteger(5, 75),
-        description: LoremIpsum({
-          units: 'paragraphs'
+  Coupon.count()
+  .then(response => {
+    if (!response) {
+      for (let i = 0; i < 250; i++) {
+        Coupon.create({
+          title: "Coupon",
+          type: generateRandomTypes(),
+          promoCode: uid(),
+          price: generateRandomInteger(5, 20),
+          discount: generateRandomInteger(5, 75),
+          description: LoremIpsum({
+            units: "paragraphs"
+          })
         })
-      })
+      }
     }
-  }
+  })
 }
 
-module.exports = {
-  initLocalData
-}
+module.exports = { initLocalData }

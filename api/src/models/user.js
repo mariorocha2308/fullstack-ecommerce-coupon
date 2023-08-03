@@ -1,8 +1,14 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./index')
+const { DataTypes } = require("sequelize")
+const sequelize = require("./index")
 
-const User = sequelize.define('user', {
+const User = sequelize.define("user", {
   // Model attributes are defined here
+  id: {
+    allowNull: false,
+    defaultValue: DataTypes.UUIDV1,
+    primaryKey: true,
+    type: DataTypes.UUID,
+  },
   image: {
     type: DataTypes.TEXT,
     allowNull: true
@@ -29,6 +35,6 @@ const User = sequelize.define('user', {
   }
 }, {
   timestamps: false
-});
+})
 
-module.exports = User;
+module.exports = User

@@ -1,67 +1,64 @@
-const { Op } = require('sequelize')
-const User = require('../../models/user')
-const { compare, encrypt } = require('../../helpers/encrypt')
-const { generateAccessToken } = require('../../helpers/jwt')
+const { Op } = require("sequelize")
+const { compare, encrypt } = require("../../helpers/encrypt")
+const { generateAccessToken } = require("../../helpers/jwt")
+const User = require("../../models/user")
 
 const authRegister = async (req, res) => {
   const { name, email, password } = req.body
-  const encryptPassword = await encrypt(password)
 
   try {
-    const existUser = await User.findOne({raw : true, nest: true, where: {
-      [Op.or]: [{name}, {email}]
-    }})
 
-    if (existUser) {
-      compare(password, existUser.password)
-      .then((isHash) => {
-        if (isHash === true) return res.send({ error: 'There is a registered user' })
-        else if (isHash === false) return res.send({ error: 'Account already exists' })
-      })
-    }
+    User.findOrCreate({
+      where: {
+        [Op.or]: [{name}, {email}]
+      },
+      defaults: {
+        name, email, password: await encrypt(password), role: "user"
+      }
+    })
+    .then(response => {
+      if (!response[1]) {
+        return res.send({ error: "An account with this email or name already exists" })
+      }
+      
+      res.send({ message: "User was successfully registered" })
+    })
 
-    if (!existUser) {
-      User.create({ name, email, password: encryptPassword, role: 'user'})
-      .then(() => res.send({ message: 'Successfully registered' }))
-      .catch(() => res.send({ error: 'User cannot be created' }))
-    }
-  } catch (error) {
-    return res.send({ error: 'Error in server' })
+  } catch (err) {
+    return res.send({ error: "Error in server" })
   }
 }
 
-const authLogin = async (req, res) => {
+const authLogin = (req, res) => {
   const { email, password } = req.body
 
   try {
-    const isAccount = await User.findOne({raw : true, nest: true, where: {email}})
+    
+    User.findOne({ 
+      where: { email } 
+    })
+    .then(user => {
+      if (!user) return res.send({ error: "Account doest not exists" })
 
-    if (isAccount) {
-      compare(password, isAccount.password)
+      compare(password, user.dataValues.password)
       .then((isHash) => {
-        if (isHash === true) {
+        if (!isHash) return res.send({ error: "Invalid password" })
+        
+        const profile = {
+          image: user.image,
+          phone: user.phoneNumber,
+          userName: user.name,
+          email: user.email,
+          role: user.role,
+          userToken: generateAccessToken({ id: user.id, email: user.dataValues.email })
+        }
 
-          const token = generateAccessToken({id: isAccount.id, email: isAccount.email})
-
-          const profile = {
-            image: isAccount.image,
-            phone: isAccount.phoneNumber,
-            userName: isAccount.name,
-            email: isAccount.email,
-            role: isAccount.role,
-            userToken: token
-          }
-
-          return res.json(profile)
-        } else if (isHash === false) res.send({ error: 'Invalid password' })
+        res.json(profile)
       })
-    }
+    })
 
-    if (!isAccount) {
-      return res.send({ error: 'The account does not exist' })
-    }
-  } catch (error) {
-    return res.send({ error: 'Error in server' })
+  } catch (err) {
+    return res.send({ error: "Error in server" })
   }
 }
 

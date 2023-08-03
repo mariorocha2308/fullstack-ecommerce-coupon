@@ -1,22 +1,22 @@
 // https://www.npmjs.com/package/create-express-template
-'use strict';
-const express = require('express');
-const cors = require("cors");
-const morgan = require('morgan');
-const bodyParser = require("body-parser");
-const routerConfig = require('./modules/route');
-const config = require('./config/config');
-const sequelize = require('./models/index')
+"use strict"
+const express = require("express")
+const cors = require("cors")
+const morgan = require("morgan")
+const bodyParser = require("body-parser")
+const routerConfig = require("./modules/route")
+const config = require("./config/config")
+const sequelize = require("./models/index")
 
-const { initLocalData } = require('./helpers/initLocalData');
-const { initAdmin } = require('./helpers/initAdmin')
+const { initLocalData } = require("./helpers/initLocalData")
+const { initAdmin } = require("./helpers/initAdmin")
 
-const init = async () => {
+const init = () => {
 
   // var whitelist = ['http://localhost:5173']
-  
-  var configCors = {
-    origin: '*'
+
+  let configCors = {
+    origin: "*"
     // origin: function (origin, callback) {
     //   if (whitelist.indexOf(origin) !== -1) {
     //     callback(null, true)
@@ -27,31 +27,31 @@ const init = async () => {
   }
 
   // *** express instance *** //
-  const app = express();
+  const app = express()
 
   // parse requests of content-type - application/json
-  app.use(bodyParser.json());
+  app.use(bodyParser.json())
   // parse requests of content-type - application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(cors(configCors));
+  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(cors(configCors))
   app.use(morgan("dev"))
   
-  sequelize.sync({force: false})
-  .then(async () => {
-    await initLocalData()
-    await initAdmin()
+  sequelize.sync({ force: false })
+  .then(() => {
+    initLocalData()
+    initAdmin()
     console.log("Database is ready to use!")
   })
   
   app.listen(config.SERVER_PORT, () => {
-    console.log(`Listening on port ${config.SERVER_PORT} in ${config.NODE_ENV} mode`);
-  });
+    console.log(`Listening on port ${config.SERVER_PORT} in ${config.NODE_ENV} mode`)
+  })
   
-  app.use("/api/v1/", routerConfig.init());
+  app.use("/api/v1/", routerConfig.init())
   // define a route handler for the default home page
-  app.get( "/", (_, res) => {
-    return res.json({ message: "Welcome to express-create application!" });
-  });
-};
+  app.get("/", (req, res) => {
+    return res.send({ message: "Welcome to express-create application!" })
+  })
+}
 
-init();
+init()
