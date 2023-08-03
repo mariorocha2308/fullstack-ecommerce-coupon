@@ -15,44 +15,40 @@ const postReview = (req, res) => {
   }
 }
 
-// const putReview = () => {
-//   const { id } = req.params
+const putReview = async (req, res) => {
+  const { content } = req.body
+  const { id } = req.params
 
-//   try {
-//     Coupon.findOne({where: { id },
-//       include: Review,
-//       attributes: ['id', 'title', 'type', 'price', 'discount', 'description'],
-//     })
-//     .then(result => res.json(result))
-//     .catch(() => res.send({ error: "Get coupon is failed" }))
-//   } catch (error) {
-//     return res.send({ error: "Error in server" })
-//   }
-// }
+  try {
+    const review = await Review.findOne({where: { id }})
 
-// const deleteReview = (req) => {
-//   const { id } = req.params
+    if (review) {
+      review.update({ content })
+      .then(result => res.json(result))
+      .catch(() => res.send({ error: e }))
+    } else return res.send({ error: "Review not exist" })
+  } catch (error) {
+    return res.send({ error: "Error in server" })
+  }
+}
 
-//   console.log('hola');
+const deleteReview = async (req, res) => {
+  const { id } = req.params
 
-//   console.log(id);
+  try {
+    const review = await Review.findOne({where: { id }})
 
-  // try {
-  //   const isFound = await Review.findOne({where: { id }})
-
-  //   console.log(isFound);
-
-  //   if (isFound) {
-  //     Review.destroy({where: {id}})
-  //     return res.send({ message: 'Review was deleted'})
-  //   } else return res.send({ error: 'Review not exist'})
-  // } catch (error) {
-  //   return res.send({ error: "Error in server" })
-  // }
-// }
+    if (review) {
+      review.destroy()
+      return res.send({ message: 'Review was deleted'})
+    } else return res.send({ error: 'Review not exist'})
+  } catch (error) {
+    return res.send({ error: "Error in server" })
+  }
+}
 
 module.exports = {
   postReview,
-  // putReview,
-  // deleteReview
+  putReview,
+  deleteReview
 }

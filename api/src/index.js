@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const routerConfig = require('./modules/route');
 const config = require('./config/config');
 const sequelize = require('./models/index')
+
 const { initLocalData } = require('./helpers/initLocalData');
 const { initAdmin } = require('./helpers/initAdmin')
 
