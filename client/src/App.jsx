@@ -29,35 +29,32 @@ function App() {
 
   return (
     <Box color={color} bg='#F8F9F9'>
-      {/* <HashRouter> */}
+      <Routes>
+        <Route path='/' element={
+          <>
+            <Navbar/>
+            <Footer/>
+          </>
+        }>
+          <Route index element={<Home/>}/>
 
-        <Routes>
-          <Route path='/' element={
-            <>
-              <Navbar/>
-              <Footer/>
-            </>
-          }>
-            <Route index element={<Home/>}/>
+          <Route path='/auth/login' element={
+            <PrivateRoute>
+              <Login/>
+            </PrivateRoute>
+          }/>
 
-            <Route path='/auth/login' element={
-              <PrivateRoute>
-                <Login/>
-              </PrivateRoute>
-            }/>
-            
-            <Route path='/auth/register' element={
-              <PrivateRoute>
-                <Register/>
-              </PrivateRoute>
-            }/>
+          <Route path='/auth/register' element={
+            <PrivateRoute>
+              <Register/>
+            </PrivateRoute>
+          }/>
 
-            <Route path='/coupons/detail/:id' element={
-              <Detail/>
-            }/>
-          </Route>
-        </Routes>
-      {/* </HashRouter> */}
+          <Route path='/coupons/:id' element={
+            <Detail/>
+          }/>
+        </Route>
+      </Routes>
     </Box>
   )
 }

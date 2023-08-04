@@ -30,12 +30,16 @@ const Login = () => {
           return toast({
             title: data.error,
             status: 'error',
-            duration: 3000,
             position: 'bottom-right'
           })
         }
         
         login(data)
+        toast({
+          title: 'Login success',
+          status: 'success',
+          position: 'bottom-right'
+        })
         navigate('/')
       }
     })

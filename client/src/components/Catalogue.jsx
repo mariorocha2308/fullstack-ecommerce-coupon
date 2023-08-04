@@ -5,6 +5,7 @@ import { getCouponsQuery } from '../utils/apiQueries/coupon';
 import { usePaginationStore } from '../zustand/stores/usePaginationCreator';
 import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
 import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
+import { RiEarthquakeFill } from "react-icons/ri";
 import SortCoupons from './SortCoupons'
 import NotFound from './fragments/NotFound';
 import Loader from './fragments/Loader';
@@ -52,7 +53,9 @@ const Catalogue = () => {
   }
 
   const RenderCoupons = () => {
-    if (isError || coupons?.count === 0) return <NotFound w='100%' h='912px' sizeIcon='8rem' message={error}/>
+    if (isError || coupons?.count === 0) return <NotFound w='100%' h='912px' message={error} sizeMessage='md'>
+      <RiEarthquakeFill size='8rem'/>
+    </NotFound>
     
     return (
       <Grid gap='8' 
