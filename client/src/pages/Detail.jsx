@@ -4,18 +4,17 @@ import { useQuery } from 'react-query'
 import { getCouponQuery } from "../utils/apiQueries/coupon";
 import { useFavoritesPersist } from "../zustand/stores/useFavoritesPersist";
 import { useWhitelistPersist } from "../zustand/stores/useWhitelistPersist";
-import { useAuth } from "../zustand/stores/useAuth";
 import { RiChatOffFill, RiHandCoinFill } from "react-icons/ri";
 import Coupon from "../components/Coupon";
 import Review from "../components/Review";
 import NotFound from "../components/fragments/NotFound";
+import TooltipCheck from "../components/fragments/TooltipCheck";
 
 const CouponDetail = () => {
 
   const { id } = useParams()
   const { addFavorites } = useFavoritesPersist()
   const { addWhitelist } = useWhitelistPersist()
-  const { isAuth } = useAuth()
 
   const { data: coupon } = useQuery(['coupon', id], () => getCouponQuery(id))
 
@@ -38,14 +37,13 @@ const CouponDetail = () => {
           onFavorite={addFavorites}
           onWhitelist={addWhitelist}
         />
-        <Button size='md' w='100%' bgColor='blackAlpha.900' variant='unstyled' color='whiteAlpha.900' fontFamily='Poppins-Bold' mt='3rem'
-          display='flex' alignItems='center' _hover={{ boxShadow: 'lg'}}
-          leftIcon={<RiHandCoinFill/>}>
-          Buy now
-        </Button>
-        {!isAuth && (
-          <Text as='p' fontSize='13px' mt='1rem' color='red.700'>Note. if you want to but now this coupons you need to be logged</Text>
-        )}
+        <TooltipCheck>
+          <Button size='md' w='100%' bgColor='blackAlpha.900' variant='unstyled' color='whiteAlpha.900' fontFamily='Poppins-Bold' mt='3rem'
+            display='flex' alignItems='center' _hover={{ boxShadow: 'lg'}}
+            leftIcon={<RiHandCoinFill/>}>
+            Buy now
+          </Button>
+        </TooltipCheck>
       </Box>
       <Box display='flex' flexDirection='column' gap='1.5rem' w='65%' h='90%'>
         <Box display='flex' flexDirection='column' gap='1rem'>
@@ -54,7 +52,7 @@ const CouponDetail = () => {
         </Box>
         <Divider/>
         <Box display='flex' flexDirection='column' gap='1rem'>
-          <Review>
+          <Review detailId={id}>
             {coupon?.reviews.length 
               ? <RenderListReviews/> 
               : <NotFound message='No reviews' w='100%' h='100%' sizeMessage='14px'>
