@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, Button, ButtonGroup, IconButton, Input, Text } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, IconButton, Input, Text, useToast } from "@chakra-ui/react";
 import { RiCloseLine } from "react-icons/ri";
 import { useAuth } from "../zustand/stores/useAuth";
 import { useMutation, useQueryClient } from 'react-query'
@@ -11,6 +11,7 @@ import TooltipCheck from "./fragments/TooltipCheck";
 const Review = props => {
 
   const reviewRef = useRef('')
+  const toast = useToast()
   const queryClient = useQueryClient()
   const [isOpen, setOpen] = useState(false)
   const { isAuth } = useAuth()
@@ -23,8 +24,19 @@ const Review = props => {
   }
 
   const handleSubmit = () => {
-    mutate({review: reviewRef.current, token: user.userToken}, {
-      onSuccess: () => {
+    mutate({payload: {
+        content: reviewRef.current,
+        creator: user.userName,
+        userImage: user.image,
+        couponRef: props.detailId
+      }, token: user.userToken}, {
+      onSuccess: (data) => {
+        toast({
+          title: data.message ?? data.error,
+          status: data.message ? 'success' : 'error',
+          position: 'bottom-right',
+          duration: 3000
+        })
         queryClient.invalidateQueries(['coupon', props.detailId])
       }
     })
@@ -33,7 +45,7 @@ const Review = props => {
   const RenderInput = () => {
     return (
       <Box display='flex' gap='1rem' w='100%' justifyContent='space-between'>
-        <Input size='sm' w='90%' fontSize='14px' placeholder='your feedback' maxLength='150' ref={reviewRef}/>
+        <Input size='sm' w='90%' fontSize='14px' placeholder='your feedback' maxLength='150' onChange={(e) => reviewRef.current = e.target.value }/>
         <ButtonGroup size='sm' variant='outline' >
           <Button variant='solid' colorScheme="purple" onClick={handleSubmit}>Save</Button>
           <IconButton aria-label='Add to friends' icon={<RiCloseLine/>} onClick={handleBoxInput}/>

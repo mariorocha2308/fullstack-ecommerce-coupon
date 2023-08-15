@@ -9,7 +9,7 @@ const postReview = (data) => {
       headers: {
         'Authorization': `Bearer ${data.token}`
       },
-      body: JSON.stringify(data.review)
+      body: JSON.stringify(data.payload)
     })
     .then(response => response.json())
     .then(result => resolve(result))

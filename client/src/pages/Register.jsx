@@ -13,7 +13,8 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    image: ''
   })
 
   const { mutate } = useMutation(postRegisterUser)
@@ -23,20 +24,19 @@ const Register = () => {
   }
 
   const handleSubmitRegister = () => {
+
+    registerForm.current.image = `https://source.boringavatars.com/beam/40/${registerForm.current.name}?colors=264653,f4a261,e76f51`
     if (Object.values(registerForm.current).includes('')) return toast({title: 'Some fields are empty', duration: 3000, status: 'error', position: 'bottom-right'})
     if (registerForm.current.password !== registerForm.current.confirmPassword) return toast({title: 'Password doesnt match', duration: 3000, status: 'error', position: 'bottom-right'})
 
     mutate(registerForm.current, {
       onSuccess: (data) => {
-        if (data.error) {
-          return toast({
-            title: data.error,
-            status: 'error',
-            position: 'bottom-right',
-            duration: 3000
-          })
-        }
-        toast({ title: 'Register Success', duration: 3000, status: 'success', position: 'bottom-right'})
+        toast({
+          title: data.message ?? data.error,
+          status: data.message ? 'success' : 'error',
+          position: 'bottom-right',
+          duration: 3000
+        })
         navigate('/auth/login')
       }
     })
