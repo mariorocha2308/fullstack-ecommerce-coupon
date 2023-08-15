@@ -4,7 +4,7 @@ const { generateAccessToken } = require("../../helpers/jwt")
 const User = require("../../models/user")
 
 const authRegister = async (req, res) => {
-  const { name, email, password } = req.body
+  const { name, email, password, image } = req.body
 
   try {
 
@@ -13,7 +13,7 @@ const authRegister = async (req, res) => {
         [Op.or]: [{name}, {email}]
       },
       defaults: {
-        name, email, password: await encrypt(password), role: "user"
+        image, name, email, password: await encrypt(password), role: "user"
       }
     })
     .then(response => {

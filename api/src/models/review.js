@@ -10,7 +10,8 @@ const Review = sequelize.define("review", {
     type: DataTypes.UUID,
   },
   userImage: {
-    type: DataTypes.TEXT
+    type: DataTypes.TEXT,
+    allowNull: false
   },
   creator: {
     type: DataTypes.STRING,
