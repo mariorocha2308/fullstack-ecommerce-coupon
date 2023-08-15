@@ -4,8 +4,10 @@ const postLoginUser = (input) => {
   return new Promise((resolve, reject) => {
     fetch(`${API_HOST}/auth/login`, {
       method: 'POST',
-      body: JSON.stringify(input),
-      headers:{'Content-Type': 'application/json'}
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(input)
     })
     .then(response => response.json())
     .then(result => resolve(result))
@@ -17,8 +19,10 @@ const postRegisterUser = (input) => {
   return new Promise((resolve, reject) => {
     fetch(`${API_HOST}/auth/register`, {
       method: 'POST',
-      body: JSON.stringify(input),
-      headers:{'Content-Type': 'application/json'}
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(input)
     })
     .then(response => response.json())
     .then(result => resolve(result))

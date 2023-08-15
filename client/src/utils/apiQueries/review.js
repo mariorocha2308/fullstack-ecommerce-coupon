@@ -7,6 +7,7 @@ const postReview = (data) => {
     fetch(`${API_HOST}/review/post`, {
       method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${data.token}`
       },
       body: JSON.stringify(data.payload)

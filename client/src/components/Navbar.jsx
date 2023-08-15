@@ -26,7 +26,7 @@ const Navbar = () => {
             <Text fontFamily='Monserrat' onClick={() => onNavigation('/')} cursor='pointer'>CPNSTORE</Text>
           </Box>
 
-          <Box display='flex' gap='3rem' alignItems='center'>
+          <Box display='flex' gap='2rem' alignItems='center'>
             <Box display='flex' gap='1.5rem'>
               <RiFireFill size='22px'/>
               <RiNotification4Fill size='22px'/>

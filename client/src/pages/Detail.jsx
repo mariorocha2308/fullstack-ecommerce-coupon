@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Divider, Text } from "@chakra-ui/react";
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { getCouponQuery } from "../utils/apiQueries/coupon";
@@ -9,6 +9,7 @@ import Coupon from "../components/Coupon";
 import Review from "../components/Review";
 import NotFound from "../components/fragments/NotFound";
 import TooltipCheck from "../components/fragments/TooltipCheck";
+import moment from 'moment'
 
 const CouponDetail = () => {
 
@@ -19,9 +20,14 @@ const CouponDetail = () => {
   const { data: coupon } = useQuery(['coupon', id], () => getCouponQuery(id))
 
   const RenderListReviews = () => {
-    return (
-      <Text>Hola</Text>
-    )
+    return coupon.reviews.reverse().slice(0, 3).map((review, idx) => (
+      <Box p='1rem' key={idx}>
+        <Avatar size='sm' name='' src={review.userImage} />
+        <Text>{review.content}</Text>
+        <Text>{moment(review.createdAt).format('DD/MM/YYYY, h:mm a')}</Text>
+        <Text>{review.creator}</Text>
+      </Box>
+    ))
   }
 
   return ( 
