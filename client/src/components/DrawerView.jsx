@@ -3,11 +3,11 @@ import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerCo
 const DrawerView = props => {
 
   return (  
-    <Drawer isOpen={props.isOpen} placement='right' onClose={props.onClose} finalFocusRef={props.btnRef}>
+    <Drawer isOpen={props.isOpen} placement='right' onClose={props.onClose} finalFocusRef={props.btnRef} size={props.size}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>{props.titleDrawer}</DrawerHeader>
+        <DrawerHeader fontSize='17px' fontFamily='Poppins-Bold'>{props.title}</DrawerHeader>
         <DrawerBody>
           {props.children}
         </DrawerBody>

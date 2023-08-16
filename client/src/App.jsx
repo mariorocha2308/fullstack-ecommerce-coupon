@@ -8,7 +8,6 @@ import { getItem } from 'react-safe-storage'
 const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
-const Detail = lazy(() => import('./pages/Detail'))
 
 //* COMPONENTS
 const PrivateRoute = lazy(() => import('./components/fragments/PrivateRoute'))
@@ -50,9 +49,6 @@ function App() {
             </PrivateRoute>
           }/>
 
-          <Route path='/coupons/:id' element={
-            <Detail/>
-          }/>
         </Route>
       </Routes>
     </Box>

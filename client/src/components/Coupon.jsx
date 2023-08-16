@@ -1,16 +1,20 @@
-import React from 'react';
+import { useRef, Suspense, lazy } from 'react';
 import { RiShoppingBag3Fill, RiHeart2Fill } from 'react-icons/ri'
-import { Box, Text, Circle, Stack, Icon } from '@chakra-ui/react';
+import { Box, Text, Circle, Stack, Icon, useDisclosure } from '@chakra-ui/react';
 import { couponColorizer } from '../utils/functions/couponColorizer'
 import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
 import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
-import { smoothWindowTop } from '../utils/functions/scrollTop';
-import { Link } from 'react-router-dom';
+
+const DrawerView = lazy(() => import('./DrawerView'))
+const Detail = lazy(() => import('../pages/Detail'))
 
 const Coupon = props => {
 
   const { favorites } = useFavoritesPersist()
   const { whitelist } = useWhitelistPersist()
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
 
   return (
     <Box display='flex' flexDirection='column' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' 
@@ -27,7 +31,7 @@ const Coupon = props => {
         />
       </Stack>
 
-      <Link to={`/coupons/${props.id}`} onClick={smoothWindowTop}>
+      <Box cursor='pointer' onClick={onOpen} ref={btnRef}>
         <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>
         <Box display='flex' w='100%' h='5vh' alignItems='center' borderColor='blackAlpha.900' border='2px' borderRadius='5px' mt='0.5rem'>
           <Box display='flex' alignItems='center' justifyContent='center' w='50%' bgColor='blackAlpha.900' h='100%' color='white'>
@@ -37,7 +41,13 @@ const Coupon = props => {
             <Text fontSize='16px' fontFamily='Poppins-Bold'>{props.discount}%</Text>
           </Box>
         </Box>
-      </Link>
+      </Box>
+
+      <Suspense>
+        <DrawerView isOpen={isOpen} onClose={onClose} size='sm' title={`Detail > Coupon > ${props.type}`}>
+          <Detail id={props.id}/>
+        </DrawerView>
+      </Suspense>
     </Box>
   );
 }
