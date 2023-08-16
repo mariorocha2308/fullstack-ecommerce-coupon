@@ -3,6 +3,8 @@ const Review = require("../../models/review")
 const postReview = (req, res) => {
   const { content, userImage, creator, couponRef } = req.body
 
+  console.log(content, userImage, creator, couponRef);
+
   try {
 
     Review.create({

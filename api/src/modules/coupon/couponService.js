@@ -37,7 +37,14 @@ const getCouponById = (req, res) => {
 
     Coupon.findOne({
       where: { id },
-      include: Review,
+      include: [{
+        model: Review,
+        as: 'reviews'
+      }],
+      order: [[
+        {model: Review, as: 'reviews'},
+        'updatedAt', 'DESC'
+      ]],
       attributes: ["id", "title", "type", "price", "discount", "description"],
     })
     .then(result => res.json(result))
