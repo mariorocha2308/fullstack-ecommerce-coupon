@@ -12,7 +12,7 @@ const DrawerView = props => {
           {props.children}
         </DrawerBody>
         <DrawerFooter>
-          {props.footerTemplate}
+          {props.footerTemplate()}
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
