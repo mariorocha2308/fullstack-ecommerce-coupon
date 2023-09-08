@@ -1,14 +1,12 @@
 const Review = require("../../models/review")
 
 const postReview = (req, res) => {
-  const { content, userImage, creator, couponRef } = req.body
-
-  console.log(content, userImage, creator, couponRef);
+  const { content, userImage, creator, couponRef, uidUser } = req.body
 
   try {
 
     Review.create({
-      content, userImage, creator
+      content, userImage, creator, uidUser
     })
     .then(response => response.addCoupon(couponRef))
     .then(() => res.send({ message: 'Review was successfully created '}))

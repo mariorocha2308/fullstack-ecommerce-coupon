@@ -46,6 +46,7 @@ const authLogin = (req, res) => {
         
         const profile = {
           image: user.image,
+          uid: user.id,
           phone: user.phoneNumber,
           userName: user.name,
           email: user.email,
