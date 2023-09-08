@@ -1,15 +1,13 @@
-import { Avatar, Box, Button, Divider, IconButton, Input, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Input, Text } from "@chakra-ui/react";
 import { deleteReview, postReview, updateReview } from "../utils/apiQueries/review";
 import { useToastHook } from '../hooks/useCustomToast.js'
 import { useMutation, useQueryClient } from "react-query";
 import { useAuth } from '../zustand/stores/useAuth' 
-import { RiMore2Fill } from "react-icons/ri";
-
-import moment from "moment";
 import { useRef, useState } from "react";
 import { getItem } from "react-safe-storage";
+import Review from "./Review";
 
-const ListReview = (props) => {
+const ListReview = props => {
 
   const reviewIdRef = useRef('')
   const [content, setContent] = useState('')
@@ -20,7 +18,7 @@ const ListReview = (props) => {
   const queryClient = useQueryClient()
   const onPost = useMutation(postReview)
   const onDelete = useMutation(deleteReview)
-  const onUpdate = useMutation(updateReview) 
+  const onUpdate = useMutation(updateReview)
 
   const handleSubmit = () => {
     if (reviewIdRef.current) {
@@ -28,8 +26,7 @@ const ListReview = (props) => {
           content: content,
           id: reviewIdRef.current
         }, token: user.userToken}, {
-        onSuccess: (data) => {
-          toast({ message: data.message ?? data.error, status: data.message ? 'success' : 'error' })
+        onSuccess: () => {
           setContent('')
           reviewIdRef.current = ''
           queryClient.invalidateQueries(['coupon', props.id])
@@ -40,12 +37,12 @@ const ListReview = (props) => {
     if (content) {
       onPost.mutate({payload: {
           content: content,
+          uidUser: user.uid,
           creator: user.userName,
           userImage: user.image,
           couponRef: props.id
         }, token: user.userToken}, {
-        onSuccess: (data) => {
-          toast({ message: data.message ?? data.error, status: data.message ? 'success' : 'error' })
+        onSuccess: () => {
           setContent('')
           queryClient.invalidateQueries(['coupon', props.id])
         }
@@ -60,8 +57,7 @@ const ListReview = (props) => {
     onDelete.mutate({payload: {
         id: idx 
       }, token: user.userToken}, {
-      onSuccess: (data) => {
-        toast({ message: data.message ?? data.error, status: data.message ? 'success' : 'error' })
+      onSuccess: () => {
         queryClient.invalidateQueries(['coupon', props.id])
       }
     })
@@ -84,30 +80,11 @@ const ListReview = (props) => {
         </Button>
       </Box>
       <Divider/>
-      { props.coupon?.reviews?.map((review, idx) => (
-        <Box display='flex' p='1rem' gap='1rem' key={idx} alignItems='center'>
-          <Avatar size='sm' src={review.userImage} />
-          <Box w='full'>
-            <Box display='flex' justifyContent='space-between' alignItems='center'>
-              <Text fontFamily='Poppins-Bold' fontSize='14px'>{review.creator}</Text>
-              <Text fontFamily='Poppins-Bold' fontSize='12px' textAlign='end' color='blackAlpha.800'>
-                {moment(review.updatedAt).format('DD/MM/YYYY, h:mm a')}
-              </Text>
-            </Box>
-            <Text fontFamily='Poppins-Medium' fontSize='13px' pt='0.5rem'>{review.content}</Text>
-          </Box>
-          <Menu>
-            <MenuButton as={IconButton} aria-label='More' isRound='true' size='sm' icon={<RiMore2Fill />}/>
-            <MenuList>
-              <MenuItem onClick={() => handleUpdate(review.content, review.id)}>
-                Edit
-              </MenuItem>
-              <MenuItem onClick={() => handleDelete(review.id)}>
-                Delete
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Box>
+      { props.coupon?.reviews?.map((review) => (
+        <Review review={review} key={review.id} 
+          onUpdate={() => handleUpdate(review.content, review.id)} 
+          onDelete={() => handleDelete(review.id)}
+        />
       ))}
     </Box>
   );
