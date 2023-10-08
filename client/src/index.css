@@ -71,3 +71,16 @@ body {
   src: url('./fonts/MontserratSubrayada-Bold.woff2');
   font-display: swap;
 }
+
+.navicon {
+  color: #5D6D7E  ;
+  cursor: pointer;
+}
+
+.navicon:hover {
+  color: #1B2631;
+}
+
+.navicon:active {
+  transform: scale(.95);
+}

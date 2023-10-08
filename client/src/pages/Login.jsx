@@ -1,10 +1,11 @@
+import { useRef } from 'react'
 import { Box, Button, Input, Text, InputGroup, InputLeftElement, useToast } from '@chakra-ui/react'
 import { postLoginUser } from '../utils/apiQueries/auth'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../zustand/stores/useAuth'
 import { useMutation } from 'react-query'
-import { useRef } from 'react'
 import { RiLockFill, RiMailFill } from 'react-icons/ri'
+import { smoothWindowTop } from '../utils/functions/scrollTop'
 
 const Login = () => {
 
@@ -40,6 +41,7 @@ const Login = () => {
           status: 'success',
           position: 'bottom-right'
         })
+        smoothWindowTop()
         navigate('/')
       }
     })

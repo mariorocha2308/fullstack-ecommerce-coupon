@@ -3,7 +3,7 @@ import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerCo
 const DrawerView = props => {
 
   return (  
-    <Drawer isOpen={props.isOpen} placement='right' onClose={props.onClose} finalFocusRef={props.btnRef} size={props.size}>
+    <Drawer isOpen={props.isOpen} placement='right' onClose={props.onClose} size={props.size}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
@@ -11,9 +11,14 @@ const DrawerView = props => {
         <DrawerBody>
           {props.children}
         </DrawerBody>
-        <DrawerFooter>
-          {props.footerTemplate()}
-        </DrawerFooter>
+        {
+          props.footerTemplate && (
+          <DrawerFooter>
+            {props.footerTemplate()}
+          </DrawerFooter>
+          
+          )
+        }
       </DrawerContent>
     </Drawer>
   );
