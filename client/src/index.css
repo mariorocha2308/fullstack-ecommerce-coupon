@@ -73,7 +73,7 @@ body {
 }
 
 .navicon {
-  color: #5D6D7E  ;
+  color: #2E4053;
   cursor: pointer;
 }
 
@@ -83,4 +83,25 @@ body {
 
 .navicon:active {
   transform: scale(.95);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
