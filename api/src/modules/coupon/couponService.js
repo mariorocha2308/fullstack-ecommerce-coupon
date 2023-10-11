@@ -75,8 +75,31 @@ const getHotSales = (req, res) => {
 
 }
 
+const getListCoupons = (req, res) => {
+  const { arrayId } = req.body
+
+  try {
+
+    Coupon.findAll({
+      where: {
+        id: {
+          [Op.in]: arrayId
+        }
+      },
+      attributes: ["id", "title", "type", "price", "discount"],
+    })
+    .then(result => res.json(result))
+    .catch(() => res.send({ error: "There are not list coupons" }))
+  
+  } catch (err) {
+    return res.send({ error: "Error in server" })
+  }
+
+}
+
 module.exports = {
   getCoupons,
 	getCouponById,
-  getHotSales
+  getHotSales,
+  getListCoupons
 }
