@@ -1,10 +1,10 @@
 import { useRef, Suspense, lazy } from 'react';
 import { RiShoppingBag3Fill, RiHeart2Fill } from 'react-icons/ri'
-import { Box, Text, Circle, Stack, Icon, useDisclosure, Button } from '@chakra-ui/react';
+import { Box, Text, Circle, Stack, Icon, useDisclosure } from '@chakra-ui/react';
 import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
 import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
 import { couponColorizer } from '../utils/functions/couponColorizer'
-import { RiHandCoinFill } from "react-icons/ri";
+import { FooterTemplate } from './DrawerView';
 
 const DrawerView = lazy(() => import('./DrawerView'))
 const Detail = lazy(() => import('../pages/Detail'))
@@ -16,16 +16,6 @@ const Coupon = props => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
-
-  const FooterTemplate = () => {
-    return (
-      <Button size='md' w='100%' bgColor='blackAlpha.900' variant='unstyled' color='whiteAlpha.900' fontFamily='Poppins-Bold'
-        display='flex' alignItems='center' _hover={{ boxShadow: 'lg'}}
-        leftIcon={<RiHandCoinFill/>}>
-        Buy now
-      </Button>
-    )
-  }
 
   return (
     <Box display='flex' flexDirection='column' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' 

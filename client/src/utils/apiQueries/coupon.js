@@ -31,8 +31,24 @@ const getHotSales = () => {
   })
 }
 
+const getListCoupons = (arrayId) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${API_HOST}/coupon/listof`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({arrayId})
+    })
+    .then(response => response.json())
+    .then(result => resolve(result))
+    .catch(() => reject('Failed to fetch the list coupons by array ids'))
+  })
+}
+
 export {
   getCouponsQuery,
   getCouponQuery,
-  getHotSales
+  getHotSales,
+  getListCoupons
 }

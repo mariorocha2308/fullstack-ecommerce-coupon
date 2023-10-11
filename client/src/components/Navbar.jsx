@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { RiCoupon3Fill, RiNotification4Fill, RiStore2Fill } from 'react-icons/ri'
+import { RiCoupon3Fill, RiDashboardFill, RiNotification4Fill, RiStore2Fill } from 'react-icons/ri'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { Box, Button, Text } from '@chakra-ui/react'
 import { useAuth } from '../zustand/stores/useAuth';
@@ -31,17 +31,19 @@ const Navbar = () => {
 
           <Box display='flex' gap='2rem' alignItems='center'>
             <Box display='flex' gap='1.2rem'>
-              {/* <RiFireFill size='22px' className='navicon'/> */}
-              <PopoverView header='Notifications'>
-                <Box>
-                  <RiNotification4Fill size='22px' className='navicon'/>
-                </Box>
-              </PopoverView>
-              <PopoverView header='Management' size='md' body={PopBody}>
-                <Box>
-                  <RiStore2Fill size='22px' className='navicon'/>
-                </Box>
-              </PopoverView>
+              <Suspense>
+                <PopoverView header='Notifications'>
+                  <Box>
+                    <RiNotification4Fill size='22px' className='navicon'/>
+                  </Box>
+                </PopoverView>
+                <PopoverView header='Management' size='md' body={PopBody}>
+                  <Box>
+                    <RiStore2Fill size='22px' className='navicon'/>
+                  </Box>
+                </PopoverView>
+                <RiDashboardFill size='22px' className='navicon'/>
+              </Suspense>
             </Box>
             <Box>
               <Suspense>
