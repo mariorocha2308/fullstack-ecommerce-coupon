@@ -17,7 +17,8 @@ const getCoupons = (req, res) => {
         [Op.and]: [ 
           type && {type: {[Op.iLike]: `%${type}%`}},
           discount && {discount: {[Op.between] : [startDiscount, endDiscount]}},
-          price && {price: {[Op.between] : [startPrice , endPrice]}}
+          price && {price: {[Op.between] : [startPrice , endPrice]}},
+          { isSuitable: true }
         ]
       },
       attributes: ["id", "title", "type", "price", "discount"],

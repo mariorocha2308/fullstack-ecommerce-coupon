@@ -33,6 +33,10 @@ const Coupon = sequelize.define("coupon", {
   description: {
     type: DataTypes.TEXT,
     allowNull: false
+  },
+  isSuitable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
   }
 }, {
   timestamps: false

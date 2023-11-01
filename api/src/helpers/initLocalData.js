@@ -22,7 +22,8 @@ const initLocalData = () => {
           discount: generateRandomInteger(5, 75),
           description: LoremIpsum({
             units: "paragraphs"
-          })
+          }),
+          isSuitable: true
         })
       }
     }
