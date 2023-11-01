@@ -3,6 +3,7 @@ import { Box, useColorModeValue } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom'
 import { useAuth } from './zustand/stores/useAuth'
 import { getItem } from 'react-safe-storage'
+import Dashboard from './pages/Dashboard'
 
 //* PAGES
 const Home = lazy(() => import('./pages/Home'))
@@ -29,6 +30,14 @@ function App() {
   return (
     <Box color={color} bg='#F8F9F9'>
       <Routes>
+        <Route path='/auth/login' element={
+            <Login/>
+        }/>
+
+        <Route path='/auth/register' element={
+            <Register/>
+        }/>
+        
         <Route path='/' element={
           <>
             <Navbar/>
@@ -37,15 +46,10 @@ function App() {
         }>
           <Route index element={<Home/>}/>
 
-          <Route path='/auth/login' element={
-            <PrivateRoute>
-              <Login/>
-            </PrivateRoute>
-          }/>
 
-          <Route path='/auth/register' element={
+          <Route path='/dashboard/profile' element={
             <PrivateRoute>
-              <Register/>
+              <Dashboard/>
             </PrivateRoute>
           }/>
 

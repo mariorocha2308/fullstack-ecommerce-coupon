@@ -42,7 +42,9 @@ const Navbar = () => {
                     <RiStore2Fill size='22px' className='navicon'/>
                   </Box>
                 </PopoverView>
-                <RiDashboardFill size='22px' className='navicon'/>
+                {isAuth && (
+                  <RiDashboardFill size='22px' className='navicon' onClick={() => onNavigation('/dashboard/profile')}/>
+                )}
               </Suspense>
             </Box>
             <Box>
