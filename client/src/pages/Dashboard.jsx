@@ -1,6 +1,11 @@
+import { Box } from '@chakra-ui/react'
+
 const Dashboard = () => {
-  return ( 
-    <h4>Dashboard</h4>
+
+  return (
+    <Box display='flex' alignItems='center' flexDirection='column' width='30%' margin='auto' height='90vh' justifyContent='center'>
+
+    </Box>
   );
 }
 
