@@ -3,12 +3,12 @@ import { Box, useColorModeValue } from '@chakra-ui/react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './zustand/stores/useAuth'
 import { getItem } from 'react-safe-storage'
-import Dashboard from './pages/Dashboard'
 
 //* PAGES
 const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
 
 //* COMPONENTS
 const Navbar = lazy(() => import('./components/Navbar'))

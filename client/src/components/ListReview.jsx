@@ -6,6 +6,7 @@ import { useAuth } from '../zustand/stores/useAuth'
 import { useRef, useState } from "react";
 import { getItem } from "react-safe-storage";
 import Review from "./Review";
+import TootilpSession from "./fragments/TooltipSession.jsx";
 
 const ListReview = props => {
 
@@ -71,13 +72,14 @@ const ListReview = props => {
   return (  
     <Box border='1px' borderColor='blackAlpha.100' borderRadius='5px'>
       <Box display='flex' p='1rem' gap='0.5rem' flexDirection='column'>
-        {!isAuth && (<Text color='tomato' fontFamily='Poppins-Medium' fontSize='12px'>* logged, is required</Text>)}
         <Input size='sm' mt='0.5rem' fontSize='14px' placeholder='your feedback' maxLength='150'
           defaultValue={content} 
-          onChange={(e) => setContent(e.target.value) }/>
-        <Button size='sm' mt='0.5rem' onClick={isAuth ? handleSubmit : null}>
-          { props.coupon.reviews.length ? 'Submit' : 'Start discussion'}
-        </Button>
+          onChange={(e) => setContent(e.target.value) } />
+        <TootilpSession label='Session is required'>
+          <Button size='sm' mt='0.5rem' onClick={isAuth ? handleSubmit : null}>
+            { props.coupon.reviews.length ? 'Submit' : 'Start discussion'}
+          </Button>
+        </TootilpSession>
       </Box>
       <Divider/>
       { props.coupon?.reviews?.map((review) => (

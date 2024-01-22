@@ -5,7 +5,8 @@ import { Box, Button, Text } from '@chakra-ui/react'
 import { useAuth } from '../zustand/stores/useAuth';
 import { smoothWindowTop } from '../utils/functions/scrollTop';
 import Loader from './fragments/Loader';
-import PopBody from './PopBody';
+import PopBodyManagement from './PopBodyManagement';
+import { getItem } from 'react-safe-storage';
 
 const AvatarMenu = lazy(() => import('./AvatarMenu'))
 const PopoverView = lazy(() => import('./PopoverView'))
@@ -14,6 +15,7 @@ const Navbar = () => {
 
   const navigate = useNavigate()
   const { isAuth } = useAuth()
+  const user = JSON.parse(getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user'))
 
   const onNavigation = (url) => {
     smoothWindowTop()
@@ -37,11 +39,13 @@ const Navbar = () => {
                     <RiNotification4Fill size='22px' className='navicon'/>
                   </Box>
                 </PopoverView>
-                <PopoverView header='Management' size='md' body={PopBody}>
-                  <Box>
-                    <RiStore2Fill size='22px' className='navicon'/>
-                  </Box>
-                </PopoverView>
+                {user?.role !== 'admin-default' && (
+                  <PopoverView header='Management' size='md' body={PopBodyManagement}>
+                    <Box>
+                      <RiStore2Fill size='22px' className='navicon'/>
+                    </Box>
+                  </PopoverView>
+                )}
                 {isAuth && (
                   <RiDashboardFill size='22px' className='navicon' onClick={() => onNavigation('/dashboard/profile')}/>
                 )}

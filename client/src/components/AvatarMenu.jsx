@@ -11,7 +11,7 @@ const AvatarMenu = () => {
   const user = JSON.parse(getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user'))
 
   const handleLogOut = () => {
-    logOut(user.role)
+    logOut('user')
     navigate('/')
   }
 

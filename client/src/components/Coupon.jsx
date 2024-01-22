@@ -5,6 +5,7 @@ import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
 import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
 import { couponColorizer } from '../utils/functions/couponColorizer'
 import { FooterTemplate } from './DrawerView';
+import { getItem } from 'react-safe-storage';
 
 const DrawerView = lazy(() => import('./DrawerView'))
 const Detail = lazy(() => import('../pages/Detail'))
@@ -13,24 +14,27 @@ const Coupon = props => {
 
   const { favorites } = useFavoritesPersist()
   const { whitelist } = useWhitelistPersist()
+  const user = JSON.parse(getItem(import.meta.env.VITE_SECRET_PASSPHRASE, 'user'))
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
   return (
     <Box display='flex' flexDirection='column' w='100%' h='17rem' boxShadow='lg' fontFamily='Poppins-Regular' position='relative' borderRadius='5px' 
-      overflow='hidden' boxSizing='border-box' p='4' minW='230px' bg='white' justifyContent='flex-end'>
+      overflow='hidden' boxSizing='border-box' p='4' minW='230px' bgColor='white' justifyContent='flex-end'>
       <Circle size='11rem' bg={couponColorizer(props.discount)} color='white' position='absolute' top='-7' right='-8'>
       </Circle>
 
-      <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800'>
-        <Icon as={RiHeart2Fill} cursor='pointer' fontSize='24px' onClick={() => props.onFavorite(props.id)}
-          color={favorites.some(favorite => favorite === props.id) ? 'blackAlpha.800' : 'whiteAlpha.800'}
-        />
-        <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px' onClick={() => props.onWhitelist(props.id)}
-          color={whitelist.some(whitelist => whitelist === props.id) ? 'blackAlpha.800' : 'whiteAlpha.800'}
-        />
-      </Stack>
+      {user?.role !== 'admin-default' && (
+        <Stack spacing='3' direction='column' align='center' px='2' position='absolute' top='4' right='2' color='whiteAlpha.800'>
+          <Icon as={RiHeart2Fill} cursor='pointer' fontSize='24px' onClick={() => props.onFavorite(props.id)}
+            color={favorites.some(favorite => favorite === props.id) ? 'blackAlpha.800' : 'whiteAlpha.800'}
+          />
+          <Icon as={RiShoppingBag3Fill} cursor='pointer' fontSize='24px' onClick={() => props.onWhitelist(props.id)}
+            color={whitelist.some(whitelist => whitelist === props.id) ? 'blackAlpha.800' : 'whiteAlpha.800'}
+          />
+        </Stack>
+      )}
 
       <Box cursor='pointer' onClick={onOpen} ref={btnRef}>
         <Text fontSize='17px' fontFamily='Poppins-Bold'>{props.type}</Text>
@@ -46,7 +50,7 @@ const Coupon = props => {
 
       <Suspense>
         <DrawerView isOpen={isOpen} onClose={onClose} size='sm' title={`Detail > Coupon > ${props.type}`} 
-          footerTemplate={FooterTemplate}>
+          footerTemplate={user?.role !== 'admin-default' && FooterTemplate}>
           <Detail id={props.id}/>
         </DrawerView>
       </Suspense>
