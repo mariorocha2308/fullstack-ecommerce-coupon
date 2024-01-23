@@ -1,4 +1,5 @@
-import { Box, Grid, Text } from '@chakra-ui/react'
+import { Box, Button, Grid, Text } from '@chakra-ui/react'
+import TableCoupons from '../components/TableCoupons';
 
 const Dashboard = () => {
 
@@ -23,8 +24,12 @@ const Dashboard = () => {
             </Box>
         </Grid>
       </Box>
-      <Box bgColor='whiteAlpha.800' h='50vh' p='1rem' borderRadius='md' boxShadow='lg'>
-        <Text fontFamily='Poppins-Medium'>Coupons</Text>
+      <Box bgColor='whiteAlpha.800' h='fit-content' p='1rem' borderRadius='md' boxShadow='lg' display='flex' flexDirection='column' gap='1rem'>
+        <Box display='flex' justifyContent='space-between' alignItems='center'>
+          <Text fontFamily='Poppins-Bold' fontSize='18px'>Coupons</Text>
+          <Button size='sm' colorScheme='purple'>Add</Button>
+        </Box>
+        <TableCoupons/>
       </Box>
     </Box>
   );
