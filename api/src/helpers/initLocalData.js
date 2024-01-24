@@ -3,12 +3,13 @@ const ShortUniqueId = require("short-unique-id")
 const LoremIpsum = require("lorem-ipsum").loremIpsum
 const { generateRandomTypes, generateRandomInteger } = require("./generator")
 
+const uid = new ShortUniqueId({ 
+  length: 10,
+  dictionary: "alphanum_upper",
+})
+
 const initLocalData = () => {
 
-  const uid = new ShortUniqueId({ 
-    length: 10,
-    dictionary: "alphanum_upper",
-  })
 
   Coupon.count()
   .then(response => {
@@ -30,4 +31,4 @@ const initLocalData = () => {
   })
 }
 
-module.exports = { initLocalData }
+module.exports = { initLocalData, uid }

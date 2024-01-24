@@ -23,11 +23,11 @@ const Coupon = sequelize.define("coupon", {
     allowNull: false
   },
   price: {
-    type: DataTypes.BIGINT,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   discount: {
-    type: DataTypes.SMALLINT,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   description: {
