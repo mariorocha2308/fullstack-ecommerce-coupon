@@ -1,22 +1,12 @@
 import { create } from 'zustand'
 
-const usePaginationHomeStore = create((set) => ({
+const usePaginationStore = create((set) => ({
   pageSize: 12,
-  dataLength: 0,
-  currentPage: 1,
-  setCurrentPage: (value) => set({currentPage: value}),
-  setDataLength: (size) => set({dataLength: size})
+  currentPage: {
+    table: 1,
+    grid: 1
+  },
+  setCurrentPage: (target, value) => set((state) => ({currentPage: {...state.currentPage, [target]: value }})),
 }))
 
-const usePaginationDashStore = create((set) => ({
-  pageSize: 12,
-  dataLength: 0,
-  currentPage: 1,
-  setCurrentPage: (value) => set({currentPage: value}),
-  setDataLength: (size) => set({dataLength: size})
-}))
-
-export { 
-  usePaginationHomeStore, 
-  usePaginationDashStore 
-}
+export { usePaginationStore }

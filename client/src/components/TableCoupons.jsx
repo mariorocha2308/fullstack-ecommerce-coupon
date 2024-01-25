@@ -1,10 +1,13 @@
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer, IconButton, Badge } from '@chakra-ui/react'
+import { usePaginationStore } from '../zustand/stores/usePaginationCreator';
 import { RiEdit2Fill, RiDeleteBin3Fill } from 'react-icons/ri'
 import { getCouponsTableQuery } from '../utils/apiQueries/admin';
 import { useQuery } from 'react-query'
+import Pagination from '../components/Pagination'
 
 const TableCoupons = () => {
-  const { data: itemsCoupons } = useQuery(['itemsCoupons'], () => getCouponsTableQuery({ currentPage: 1 }))
+  const { currentPage, pageSize, setCurrentPage } = usePaginationStore()
+  const { data: itemsCoupons } = useQuery(['itemsCoupons', currentPage.table ], () => getCouponsTableQuery({ currentPage: currentPage.table, pageSize }))
 
   return (  
     <TableContainer border='1px' p='1rem' borderRadius='0.4rem' borderColor='gray.300'>
@@ -21,7 +24,7 @@ const TableCoupons = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {itemsCoupons?.rows.map((coupon) => (
+          {itemsCoupons?.rows?.map((coupon) => (
             <Tr key={coupon.id}>
               <Td>{coupon.type}</Td>
               <Td>{coupon.promoCode}</Td>
@@ -38,6 +41,7 @@ const TableCoupons = () => {
           ))}
         </Tbody>
       </Table>
+      <Pagination dataLength={itemsCoupons?.count} currentPage={currentPage.table} setCurrentPage={setCurrentPage} pageSize={pageSize} target='table'/>
     </TableContainer>
   );
 }

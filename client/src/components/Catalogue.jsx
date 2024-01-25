@@ -10,6 +10,7 @@ import SortCoupons from './SortCoupons'
 import NotFound from './fragments/NotFound';
 import Loader from './fragments/Loader';
 import Coupon from './Coupon';
+import Pagination from './Pagination';
 
 const Catalogue = () => {
 
@@ -21,21 +22,18 @@ const Catalogue = () => {
   
   const { addFavorites } = useFavoritesPersist()
   const { addWhitelist } = useWhitelistPersist()
-  const { currentPage, pageSize, setDataLength, setCurrentPage } = usePaginationStore()
+  const { currentPage, pageSize, setCurrentPage } = usePaginationStore()
 
-  const { data: coupons, refetch, isFetching, error, isError } = useQuery(['coupons', category.current || 'all', currentPage, ], () => getCouponsQuery({
+  const { data: coupons, refetch, isFetching, error, isError } = useQuery(['coupons', category.current || 'all', currentPage.grid, ], () => getCouponsQuery({
       type: category.current,
       price: sort.current.price,
       discount: sort.current.discount,
-      currentPage, pageSize}), {
-    onSuccess: (data) => {
-      setDataLength(data?.count)
-    },
+      currentPage: currentPage.grid, pageSize}), {
     staleTime: Infinity
   })
 
   const handleCategory = (item) => {
-    setCurrentPage(1)
+    setCurrentPage('grid', 1)
     category.current = item
   }
 
@@ -81,12 +79,13 @@ const Catalogue = () => {
   }
 
   return ( 
-    <Box my='2rem'>
+    <Box display='flex' flexDirection='column' gap='2rem' my='2rem'>
       <Box display='flex'  justifyContent='space-between' mb='2rem'>
         <Text fontFamily='Poppins-Bold' fontSize='20px'>Catalogue</Text>
         <SortCoupons onHandleRange={(e) => handleRange(e)} onHandleCategory={handleCategory} onRefetch={() => refetch()}/>
       </Box>
       {isFetching ? <Loader h='912px'/> : <RenderCoupons/>}
+      <Pagination dataLength={coupons?.count} currentPage={currentPage.grid} setCurrentPage={setCurrentPage} pageSize={pageSize} target='grid'/>
     </Box>
   );
 }

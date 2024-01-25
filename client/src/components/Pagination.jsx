@@ -1,16 +1,13 @@
 import React from 'react';
 import { Box, Button, ButtonGroup, IconButton } from '@chakra-ui/react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { usePaginationStore } from '../zustand/stores/usePaginationCreator';
 
-const Pagination = () => {
-
-  const { dataLength, pageSize, currentPage, setCurrentPage} = usePaginationStore()
+const Pagination = props => {
 
   const siblingCount = 2
-  const totalPageCount = Math.ceil(dataLength / pageSize);
-  const leftSiblingIndex = Math.max(currentPage - siblingCount, 1)
-  const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPageCount)
+  const totalPageCount = Math.ceil(props.dataLength / props.pageSize);
+  const leftSiblingIndex = Math.max(props.currentPage - siblingCount, 1)
+  const rightSiblingIndex = Math.min(props.currentPage + siblingCount, totalPageCount)
 
   const range = (start, end) => {
     let length = end - start + 1;
@@ -18,21 +15,23 @@ const Pagination = () => {
   }
 
   return (
-    <Box display='flex' m1='1rem' mb='4rem' justifyContent='center'>
+    <Box display='flex' my='1rem' justifyContent='center'>
       <ButtonGroup isAttached variant='ghost'>
-        <IconButton icon={<MdChevronLeft/>} onClick={() => setCurrentPage(currentPage - 1)} isDisabled={currentPage === 1}/>
+        <IconButton icon={<MdChevronLeft/>} onClick={() => props.setCurrentPage(props.target, props.currentPage - 1)} 
+          isDisabled={props.currentPage === 1}/>
         {range(leftSiblingIndex, rightSiblingIndex).map(pageNumber => (
           <Button
             key={pageNumber}
-            bgColor={currentPage === pageNumber && 'white'}
-            colorScheme={currentPage === pageNumber && 'purple'}
-            variant={currentPage === pageNumber ? 'outline' : 'link'}
+            bgColor={props.currentPage === pageNumber && 'white'}
+            colorScheme={props.currentPage === pageNumber && 'purple'}
+            variant={props.currentPage === pageNumber ? 'outline' : 'link'}
             gap='0.5rem'
-            onClick={() => setCurrentPage(pageNumber)}>
+            onClick={() => props.setCurrentPage(props.target, pageNumber)}>
             {pageNumber}
           </Button>
         ))}
-        <IconButton icon={<MdChevronRight/>} onClick={() => setCurrentPage(currentPage + 1)} isDisabled={currentPage === totalPageCount}/>
+        <IconButton icon={<MdChevronRight/>} onClick={() => props.setCurrentPage(props.target, props.currentPage + 1)} 
+          isDisabled={props.currentPage === totalPageCount}/>
       </ButtonGroup>
     </Box>
   );
