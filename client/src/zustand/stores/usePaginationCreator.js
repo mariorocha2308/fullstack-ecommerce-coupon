@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-const usePaginationStore = create((set) => ({
+const usePaginationHomeStore = create((set) => ({
   pageSize: 12,
   dataLength: 0,
   currentPage: 1,
@@ -8,4 +8,15 @@ const usePaginationStore = create((set) => ({
   setDataLength: (size) => set({dataLength: size})
 }))
 
-export { usePaginationStore }
+const usePaginationDashStore = create((set) => ({
+  pageSize: 12,
+  dataLength: 0,
+  currentPage: 1,
+  setCurrentPage: (value) => set({currentPage: value}),
+  setDataLength: (size) => set({dataLength: size})
+}))
+
+export { 
+  usePaginationHomeStore, 
+  usePaginationDashStore 
+}
