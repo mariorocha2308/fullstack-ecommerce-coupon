@@ -14,7 +14,7 @@ const initLocalData = () => {
   Coupon.count()
   .then(response => {
     if (!response) {
-      for (let i = 0; i < 250; i++) {
+      for (let i = 0; i < 80; i++) {
         Coupon.create({
           title: "Coupon",
           type: generateRandomTypes(),
