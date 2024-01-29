@@ -14,8 +14,7 @@ const getTableCoupons = (req, res) => {
         [Op.and]: [ 
           promoCode && {promoCode: {[Op.iLike]: `%${promoCode}%`}}
         ]
-      },
-      attributes: ["id", "title", "type", "price", "discount", "isSuitable", "promoCode"],
+      }
     })
     .then(result => res.json(result))
     .catch(() => res.send({ error: "There are not table coupons" }))
