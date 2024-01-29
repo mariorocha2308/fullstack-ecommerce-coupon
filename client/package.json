@@ -9,34 +9,34 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.7.1",
-    "@emotion/react": "^11.11.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "framer-motion": "^10.12.17",
-    "moment": "^2.29.4",
+    "framer-motion": "^11.0.3",
+    "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.0",
-    "react-icons": "^4.10.1",
+    "react-hook-form": "^7.49.3",
+    "react-icons": "^5.0.1",
     "react-query": "^3.39.3",
-    "react-router-dom": "^6.14.0",
+    "react-router-dom": "^6.21.3",
     "react-safe-storage": "^1.0.3",
-    "zustand": "^4.3.8"
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.9",
-    "@babel/eslint-parser": "^7.22.9",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@vitejs/plugin-react": "^4.0.1",
+    "@babel/core": "^7.23.9",
+    "@babel/eslint-parser": "^7.23.9",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-config-standard-jsx": "^11.0.0",
     "eslint-config-standard-react": "^13.0.0",
-    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2",
-    "vite": "^4.3.9"
+    "eslint-plugin-react": "^7.33.2",
+    "vite": "^5.0.12"
   },
   "volta": {
     "node": "16.19.1"

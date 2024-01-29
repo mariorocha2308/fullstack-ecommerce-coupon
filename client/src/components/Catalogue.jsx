@@ -64,7 +64,6 @@ const Catalogue = () => {
           <GridItem w='100%' h='100%' key={coupon.id}>
             <Coupon
               id={coupon.id}
-              title={coupon.title} 
               type={coupon.type} 
               promoCode={coupon.promoCode}
               discount={coupon.discount} 
