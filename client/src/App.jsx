@@ -9,6 +9,7 @@ const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Payment = lazy(() => import('./pages/Payment'))
 
 //* COMPONENTS
 const Navbar = lazy(() => import('./components/Navbar'))
@@ -52,6 +53,12 @@ function App() {
           <Route path='/dashboard/profile' element={
             isAuth 
             ? (<Dashboard/>)
+            : (<Navigate to='/'/>)
+          }/>
+
+          <Route path='/confirm/payment' element={
+            isAuth 
+            ? (<Payment/>)
             : (<Navigate to='/'/>)
           }/>
           

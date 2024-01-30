@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Text, Box } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Text, Box, Button } from '@chakra-ui/react'
 import { getHotSales, getListCoupons } from '../utils/apiQueries/coupon';
 import { useFavoritesPersist } from '../zustand/stores/useFavoritesPersist';
 import { useWhitelistPersist } from '../zustand/stores/useWhitelistPersist';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import ItemCoupon from './ItemCoupon';
+import { useNavigate } from 'react-router-dom';
 
 const PopBody = () => {
-
+  const navigate = useNavigate()
   const { addFavorites, favorites } = useFavoritesPersist()
   const { addWhitelist, whitelist } = useWhitelistPersist()
 
@@ -27,7 +28,6 @@ const PopBody = () => {
   }, [fetchFavorites, fetchWhitelist, favorites, whitelist]);
 
   const ListEmpty = props => {
-
     return (
       <Box display='flex' justifyContent='center' gap='0.4rem' alignItems='center' color='gray.600'>
         <RiErrorWarningLine size='22px'/>
@@ -43,22 +43,27 @@ const PopBody = () => {
         <Tab>Favorites</Tab>
         <Tab>Hotsales</Tab>
       </TabList>
-
       <TabPanels>
-        <TabPanel display='flex' flexDirection='column' overflowY='scroll' maxHeight='50vh' marginTop='1rem' gap='0.6rem' pr='2' pl='0'>
-        {whitelist?.length ? listWhitelist?.map(coupon => (
-            <ItemCoupon key={coupon.id} 
-              id={coupon.id}
-              panelIdx={1}
-              title={coupon.type}
-              price={coupon.price} 
-              discount={coupon.discount} 
-              onFavorite={addFavorites}
-              onWhitelist={addWhitelist}
-            />
-          )): <ListEmpty label='Whitelist empty'/>}
+        <TabPanel display='flex'  flexDirection='column' overflowY='scroll' maxHeight='50vh' marginTop='1rem' gap='0.6rem' p={0}>
+          {whitelist?.length 
+            ? listWhitelist?.map(coupon => (
+              <ItemCoupon key={coupon.id} 
+                id={coupon.id}
+                panelIdx={1}
+                title={coupon.type}
+                price={coupon.price} 
+                discount={coupon.discount} 
+                onFavorite={addFavorites}
+                onWhitelist={addWhitelist}
+              />
+            ))
+            : <ListEmpty label='Whitelist empty'/>
+          }
+          {whitelist.length > 0 && (
+            <Button size='sm' colorScheme='purple' onClick={() => navigate('confirm/payment')}>Buy All</Button>
+          )}
         </TabPanel>
-        <TabPanel display='flex' flexDirection='column' overflowY='scroll' maxHeight='50vh' marginTop='1rem' gap='0.6rem' pr='2' pl='0'>
+        <TabPanel display='flex' flexDirection='column' overflowY='scroll' maxHeight='50vh' marginTop='1rem' gap='0.6rem' p={0}>
           {favorites?.length ? listFavorites?.map(coupon => (
               <ItemCoupon key={coupon.id} 
                 id={coupon.id}
@@ -71,7 +76,7 @@ const PopBody = () => {
               />
             )): <ListEmpty label='Favorites empty'/>}
         </TabPanel>
-        <TabPanel display='flex' flexDirection='column' overflowY='scroll' maxHeight='50vh' marginTop='1rem' gap='0.6rem' pr='2' pl='0'>
+        <TabPanel display='flex' flexDirection='column' overflowY='scroll' maxHeight='50vh' marginTop='1rem' gap='0.6rem' p={0}>
           {hotsales?.length ? hotsales?.map(coupon => (
             <ItemCoupon key={coupon.id} 
               id={coupon.id}

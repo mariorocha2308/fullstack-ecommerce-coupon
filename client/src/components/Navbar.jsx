@@ -46,7 +46,7 @@ const Navbar = () => {
                     </Box>
                   </PopoverView>
                 )}
-                {isAuth && (
+                {isAuth && user?.role === 'admin-default' && (
                   <RiDashboardFill size='22px' className='navicon' onClick={() => onNavigation('/dashboard/profile')}/>
                 )}
               </Suspense>
