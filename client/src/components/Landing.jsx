@@ -5,7 +5,7 @@ import image from '../assets/12.12 Sale-cuate.svg'
 const Landing = () => {
 
   return (  
-    <Box display='flex' py='10' justifyContent='space-evenly' alignItems='center'>
+    <Box display='flex' mt='2rem' py='1rem' justifyContent='space-evenly' alignItems='center' borderRadius='0.4rem' bgColor='white' boxShadow='lg'>
       <Box display='column' >
         <Text fontSize='35px' mb='3' fontFamily='Poppins-Bold'>Coupons Store!</Text>
         <Text width='450px' fontFamily='Poppins-Medium' mb='0.5rem' fontSize='18px'>

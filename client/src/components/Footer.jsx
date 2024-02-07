@@ -6,8 +6,8 @@ const Footer = () => {
   const onNavigation = (url) => window.open(url)
 
   return (  
-    <Box bg='white'>
-      <Box display='flex' flexDirection='column' py='3rem' boxSizing='border-box' h='100%' justifyContent='space-between'
+    <Box bg='white' h='15vh'>
+      <Box display='flex' flexDirection='column' py='1.5rem' boxSizing='border-box' h='100%' justifyContent='space-between'
         maxWidth='1200px' w='1200px' margin='auto'>
 
         <Box>
