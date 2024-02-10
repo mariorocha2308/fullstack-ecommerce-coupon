@@ -10,6 +10,7 @@ const sequelize = require("./models/index")
 
 const { initLocalData } = require("./helpers/initLocalData")
 const { initAdmin } = require("./helpers/initAdmin")
+const relations = require("./models/relations")
 
 const init = () => {
 
@@ -36,8 +37,9 @@ const init = () => {
   app.use(cors(configCors))
   app.use(morgan("dev"))
   
-  sequelize.sync({ force: false })
+  sequelize.sync({ force: true })
   .then(() => {
+    relations()
     initLocalData()
     initAdmin()
     console.log("Database is ready to use!")

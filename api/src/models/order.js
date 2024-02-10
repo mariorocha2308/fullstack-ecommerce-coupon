@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize")
 const sequelize = require("./index")
 
-const Coupon = sequelize.define("coupon", {
+const Order = sequelize.define("order", {
   // Model attributes are defined here
   id: {
     allowNull: false,
@@ -9,36 +9,26 @@ const Coupon = sequelize.define("coupon", {
     primaryKey: true,
     type: DataTypes.UUID,
   },
-  title: {
+  uidUser: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  type: {
+  userEmail: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
-  promoCode: {
+  userName: {
     type: DataTypes.STRING,
+    allowNull: true
+  },
+  couponsRef: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false
   },
-  price: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  discount: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
-  isSuitable: {
-    type: DataTypes.BOOLEAN,
+  address: {
+    type: DataTypes.STRING,
     allowNull: false
   }
-}, {
-  timestamps: false
 })
 
-module.exports = Coupon
+module.exports = Order
